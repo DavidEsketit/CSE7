@@ -29,3 +29,15 @@ print(name)
 
 age = input("What is your age? ")
 print("%s is a nice age to be in." % age)
+
+# Initializing Variable
+answer = random.randint(1,50)
+turns_left = 5
+correct_guess = False
+
+# Describes exactly ONE turn. The while loop is the Game Controller.
+while turns_left > 0 and correct_guess is False:
+    guess = int(input("Guess a number between 1 and 50: "))
+
+    if guess == answer:
+        print
