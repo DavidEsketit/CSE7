@@ -38,6 +38,5 @@ correct_guess = False
 # Describes exactly ONE turn. The while loop is the Game Controller.
 while turns_left > 0 and correct_guess is False:
     guess = int(input("Guess a number between 1 and 50: "))
-
     if guess == answer:
-        print
+        print()
