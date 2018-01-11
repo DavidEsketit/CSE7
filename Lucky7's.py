@@ -1,10 +1,10 @@
 import random
 money = 15
 trial = 0
-most_money = 0
 print("Welcome to Lucky 7's!")
 
 while money > 0:
+    most_money = 0
     dice1 = random.randint(1, 6)
     dice2 = random.randint(1, 6)
     number = dice1 + dice2
@@ -18,6 +18,8 @@ while money > 0:
         trial += 1
         print("dummy")
         print("You have %s dollar(s)left" % money)
+    if money > most_money:
+        most_money + money
 
 
 def no_money():
@@ -25,7 +27,6 @@ def no_money():
         print("You have no money left :(")
         print("You rolled %s times" % trial)
         print("The most money you had was %s" % most_money)
-    if money < most_money:
-        money += most_money
+
 
 no_money()
