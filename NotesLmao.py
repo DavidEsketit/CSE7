@@ -44,7 +44,7 @@
 # Lists
 
 the_count = [1, 2, 3, 4, 5]
-characters = ["graves", "Dory", "Boots", "Dora", "Shrek", "Odi-Man", "Ian"]
+characters = ["graves", "Dory", "Boots", "Dora", "Shrek", "Odi-Man", "Ian", "Carl"]
 print(characters[0])
 print(characters[4])
 
@@ -73,4 +73,27 @@ print(listOne)
 newStr = "".join(listOne)
 print(newStr)
 
-#
+# Adding stuff to list
+
+characters.append("Ironman/Batman/whomever you want")
+print(characters)
+
+characters.append("Black Panther")
+
+# Removing stuff from list
+
+characters.remove("Carl")
+
+characters.pop(6)
+print(characters)
+
+# The string class
+import string
+print(string.ascii_letters)
+print(string.ascii_lowercase)
+print(string.digits)
+print(string.punctuation)
+
+strTwo = 'tHiS sEntEnCe iS uNuSuAl'
+lowercase = strTwo.lower()
+print(lowercase)
