@@ -97,3 +97,9 @@ print(string.punctuation)
 strTwo = 'tHiS sEntEnCe iS uNuSuAl'
 lowercase = strTwo.lower()
 print(lowercase)
+
+# Hangman Board
+"""
+Make a list for the word, letter by letter.
+Add the letters guessed by the user to another list
+"""
