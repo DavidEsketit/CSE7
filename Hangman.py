@@ -18,24 +18,26 @@ word = random.choice(word_bank)
 guesses_left = 10
 letters_guessed = []
 print(word)
-while guesses_left > 0:
+while guesses_left != 0:
     num_of_let = len(word)
     print("The length of the word is %s" % num_of_let)
     response = input("Guess now. ")
     letters_guessed.append(response)  # Make this lowercase
     output = []
+    print("You've got %s guesses/guess left" % guesses_left)
     if response == word:  # If you guess the whole word
-        print("So far you got %s" % response)
+        print("So far you got %s" % response.join)
     else:
         print("That's not a letter.")
-
+        guesses_left -= 1
     for letter in word:
         if letter in letters_guessed:  # only compare lowercase
             # Show the letter
             output.append(letter)
         else:
             # Hide the letter
-            guesses_left -= 1
             output.append("*")
+    if guesses_left == 0:
+        print("The word was %s" % word)
     print(output)
     print("So far you've guessed %s" % letters_guessed)

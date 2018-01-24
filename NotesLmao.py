@@ -43,49 +43,49 @@
 
 # Lists
 
-the_count = [1, 2, 3, 4, 5]
-characters = ["graves", "Dory", "Boots", "Dora", "Shrek", "Odi-Man", "Ian", "Carl"]
-print(characters[0])
-print(characters[4])
-
-print(len(characters))
-
-# Going through lists
-for char in characters:
-    print(char)
-
-for num in the_count:
-    print(num ** 2)
-
-len(characters)
-range(3)  # Makes a list of the number from 0 to 2
-range(len(characters))  # Make a list of ALL INDICES
-
-for num in range(len(characters)):
-    char = characters[num]
-    print("The character at index %d is %s" % (num, char))
-
-str1 = "Hello World!"  # Start counting from 0
-listOne = list(str1)
-print(listOne)
-listOne[11] = '.'
-print(listOne)
-newStr = "".join(listOne)
-print(newStr)
-
-# Adding stuff to list
-
-characters.append("Ironman/Batman/whomever you want")
-print(characters)
-
-characters.append("Black Panther")
-
-# Removing stuff from list
-
-characters.remove("Carl")
-
-characters.pop(6)
-print(characters)
+# the_count = [1, 2, 3, 4, 5]
+# # characters = ["graves", "Dory", "Boots", "Dora", "Shrek", "Odi-Man", "Ian", "Carl"]
+# print(characters[0])
+# print(characters[4])
+#
+# print(len(characters))
+#
+# # Going through lists
+# for char in characters:
+#     print(char)
+#
+# for num in the_count:
+#     print(num ** 2)
+#
+# len(characters)
+# range(3)  # Makes a list of the number from 0 to 2
+# range(len(characters))  # Make a list of ALL INDICES
+#
+# for num in range(len(characters)):
+#     char = characters[num]
+#     print("The character at index %d is %s" % (num, char))
+#
+# str1 = "Hello World!"  # Start counting from 0
+# listOne = list(str1)
+# print(listOne)
+# listOne[11] = '.'
+# print(listOne)
+# newStr = "".join(listOne)
+# print(newStr)
+#
+# # Adding stuff to list
+#
+# characters.append("Ironman/Batman/whomever you want")
+# print(characters)
+#
+# characters.append("Black Panther")
+#
+# # Removing stuff from list
+#
+# characters.remove("Carl")
+#
+# characters.pop(6)
+# print(characters)
 
 # The string class
 import string
@@ -97,7 +97,8 @@ print(string.punctuation)
 strTwo = 'tHiS sEntEnCe iS uNuSuAl'
 lowercase = strTwo.lower()
 print(lowercase)
-
+uppercase = strTwo.upper()
+print(uppercase)
 # Hangman Board
 """
 Make a list for the word, letter by letter.
