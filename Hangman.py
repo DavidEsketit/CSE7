@@ -18,10 +18,11 @@ word = random.choice(word_bank)
 guesses_left = 10
 letters_guessed = []
 print(word)
+
 while guesses_left != 0:
     num_of_let = len(word)
-    print("The length of the word is %s" % num_of_let)
     response = input("Guess now. ")
+    print("The length of the word is %s" % num_of_let)
     letters_guessed.append(response)  # Make this lowercase
     output = []
     print("You've got %s guesses/guess left" % guesses_left)
@@ -39,5 +40,6 @@ while guesses_left != 0:
             output.append("*")
     if guesses_left == 0:
         print("The word was %s" % word)
-    print(output)
+    str1 = "".join(output)
+    print(str1)
     print("So far you've guessed %s" % letters_guessed)
