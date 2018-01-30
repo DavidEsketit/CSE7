@@ -17,19 +17,21 @@ word_bank = ["Batman", "Wonderwoman", "Joker", "Deadshot", "The Flash", "Christi
 word = random.choice(word_bank)
 guesses_left = 10
 letters_guessed = []
-print(word)
 while guesses_left != 0:
     num_of_let = len(word)
     response = input("Guess now. ")
     print("The length of the word is %s" % num_of_let)
     letters_guessed.append(response)  # Make this lowercase
+    already_g = "".join(letters_guessed)
     output = []
     print("You've got %s guesses/guess left" % guesses_left)
+
     if response == word:  # If you guess the whole word
         print("So far you got %s" % response.join)
     else:
         print("That's not a letter.")
         guesses_left -= 1
+
     for letter in word:
         if letter in letters_guessed:  # only compare lowercase
             # Show the letter
@@ -37,8 +39,16 @@ while guesses_left != 0:
         else:
             # Hide the letter
             output.append("*")
-    if guesses_left == 0:
-        print("The word was %s" % word)
+
     str1 = "".join(output)
     print(str1)
-    print("So far you've guessed %s" % letters_guessed)
+
+    if guesses_left <= 0:
+        print("The word was %s" % word)
+        print(str1)
+    print("So far you've guessed %s" % already_g)
+
+    if str1 == word:
+        print("You won!")
+        while guesses_left != 0:
+            guesses_left -= 1
