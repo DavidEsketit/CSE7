@@ -88,19 +88,91 @@
 # print(characters)
 
 # The string class
-import string
-print(string.ascii_letters)
-print(string.ascii_lowercase)
-print(string.digits)
-print(string.punctuation)
+# import string
+# print(string.ascii_letters)
+# print(string.ascii_lowercase)
+# print(string.digits)
+# print(string.punctuation)
+#
+# strTwo = 'tHiS sEntEnCe iS uNuSuAl'
+# lowercase = strTwo.lower()
+# print(lowercase)
+# uppercase = strTwo.upper()
+# print(uppercase)
+# # Hangman Board
+# """
+# Make a list for the word, letter by letter.
+# Add the letters guessed by the user to another list
+# """
 
-strTwo = 'tHiS sEntEnCe iS uNuSuAl'
-lowercase = strTwo.lower()
-print(lowercase)
-uppercase = strTwo.upper()
-print(uppercase)
-# Hangman Board
-"""
-Make a list for the word, letter by letter.
-Add the letters guessed by the user to another list
-"""
+# Dictionaries - Make up a key: value pair
+dictionary = {'name': 'Lance', 'age': 18, "height": 6 * 12 + 2}
+
+# Accessing from a dictionary
+print(dictionary['name'])
+print(dictionary['age'])
+print(dictionary['height'])
+
+large_dictionary = {
+    "California": "CA",
+    "Washington": "WA",
+    "Florida": "FL"
+}
+
+print(large_dictionary['Florida'])
+
+larger_dictionary = {
+    "California": [
+        "Fresno",
+        "Sacramento",
+        "Los Angeles"
+    ],
+    "Washington": [
+        "Seattle",
+        "Tacoma",
+        "Olympia",
+        "Spokane"
+    ],
+    "Illinois": [
+        "Chicago",
+        "Naperville",
+        "Peoria"
+    ],
+}
+
+print(larger_dictionary["Illinois"])
+print(larger_dictionary["Illinois"][0])
+
+# Spokane
+print(larger_dictionary["Washington"][3])
+
+largest_dictionary = {
+    "CA": {
+        'NAME': "California",
+        'Population': 39250000,
+        'BORDER ST': [
+            'Oregon',
+            "Nevada",
+            "Arizona"
+        ],
+    },
+    "MI": {
+        "NAME": "Michigan",
+        "POPULATION": 9928000,
+        "BORDER ST": [
+            'Wisconsin',
+            'Ohio',
+            "Indiana"
+        ]
+    },
+    "FL": {
+        "NAME": "Florida",
+        "POPULATION": 2610000,
+        "BORDER ST": [
+            'Georgia',
+            'Alabama'
+        ]
+    }
+}
+print(largest_dictionary["MI"]["BORDER ST"][1])
+print(largest_dictionary["FL"]["NAME"])
