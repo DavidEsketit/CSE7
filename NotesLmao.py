@@ -118,6 +118,10 @@ large_dictionary = {
     "Washington": "WA",
     "Florida": "FL"
 }
+# Adding to a dictionary
+dictionary["eye color"] = "white"
+print(dictionary)
+
 
 print(large_dictionary['Florida'])
 
