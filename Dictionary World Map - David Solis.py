@@ -19,3 +19,4 @@ word_map = {
 current_node = word_map['WESTHOUSE']
 print(current_node["NAME"])
 print(current_node["DESCRIPTION"])
+
