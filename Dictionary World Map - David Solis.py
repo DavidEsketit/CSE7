@@ -3,7 +3,7 @@ word_map = {
         'NAME': 'WEST OF HOUSE',
         'DESCRIPTION': 'You are west of a small house',
         'PATHS': {
-            'NORTH': "NORTHHOUSE",
+            'NORTH': "NORTH HOUSE",
             'SOUTH': "SOUTH HOUSE"
         }
     },
