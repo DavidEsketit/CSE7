@@ -1,7 +1,7 @@
 walmart = {
     'PARKING LOT': {
         'NAME': 'Parking Lot',
-        'DESCRIPTION': 'You are in a parking lot, there are no cars and there is an open door in the south to Walmart',
+        'DESCRIPTION': 'You are in a parking lot, there are no cars and there is an open door in the south to Wal-Mart',
         'PATHS': {
             'South': "PHARMACY"
         }
@@ -98,6 +98,61 @@ walmart = {
             'WEST': "BOOKS AND MAGAZINES",
             'EAST': "PAPER AND CLEANING"
         }
+    },
+    'PAPER AND CLEANING': {
+        'NAME': 'Paper and Cleaning',
+        'DESCRIPTION': 'There is bleach on the floor and full containers on the shelves. There are also some cleaning'
+                       'gloves on the floor.',
+        'PATHS': {
+            'NORTH': "BABY",
+            'WEST': "PETS",
+            'EAST': "GROCERIES"
+        }
+    },
+    'GROCERIES': {
+        'NAME': 'Groceries',
+        'DESCRIPTION': 'All the food is gone and but there is a lot of water in front of you.',
+        'PATHS': {
+            'EAST': "PAPER AND CLEANING"
+        }
+    },
+    'APPAREL': {
+        'NAME': 'Apparel',
+        'DESCRIPTION': 'There are multiple graphic tees with zombies on them.',
+        'PATHS': {
+            'NORTH': "JEWELERY",
+            'WEST': "BABY",
+            'EAST': "SHOES"
+        }
+    },
+    'RESTROOMS': {
+        'NAME': 'Restrooms',
+        'DESCRIPTIONS': 'There is a toilet in front of you with a sink next to it with some soap.',
+        'PATHS': {
+            'SOUTH': "BOOKS AND MAGAZINES",
+            'WEST': "PHOTOS"
+        }
+    },
+    'PHOTOS': {
+        'NAME': 'Photos',
+        'DESCRIPTIONS': 'There are several pictures of families on the wall.',
+        'PATHS': {
+            'SOUTH': "ELECTRONICS",
+            'EAST': "RESTROOMS"
+        }
+    },
+    'ELECTRONICS': {
+        'NAME': 'Electronics',
+        'DESCRIPTIONS': 'There is an iPhone 20 X on the ground. All the tvs are gone.',
+        'PATHS': {
+            'NORTH': "PHOTOS",
+            'SOUTH': "HOME AND OFFICE",
+            'EAST': "CRAFTS"
+        }
+    },
+    'HOME AND OFFICE': {
+        'NAME': 'Home and Office',
+        'DESCRIPTIONS': 'There are lamps and beds '
     }
 }
 
