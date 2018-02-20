@@ -105,78 +105,122 @@
 # Add the letters guessed by the user to another list
 # """
 
-# Dictionaries - Make up a key: value pair
-dictionary = {'name': 'Lance', 'age': 18, "height": 6 * 12 + 2}
+# # Dictionaries - Make up a key: value pair
+# dictionary = {'name': 'Lance', 'age': 18, "height": 6 * 12 + 2}
+#
+# # Accessing from a dictionary
+# print(dictionary['name'])
+# print(dictionary['age'])
+# print(dictionary['height'])
+#
+# large_dictionary = {
+#     "California": "CA",
+#     "Washington": "WA",
+#     "Florida": "FL"
+# }
+# # Adding to a dictionary
+# dictionary["eye color"] = "white"
+# print(dictionary)
+#
+#
+# print(large_dictionary['Florida'])
+#
+# larger_dictionary = {
+#     "California": [
+#         "Fresno",
+#         "Sacramento",
+#         "Los Angeles"
+#     ],
+#     "Washington": [
+#         "Seattle",
+#         "Tacoma",
+#         "Olympia",
+#         "Spokane"
+#     ],
+#     "Illinois": [
+#         "Chicago",
+#         "Naperville",
+#         "Peoria"
+#     ],
+# }
+#
+# print(larger_dictionary["Illinois"])
+# print(larger_dictionary["Illinois"][0])
+#
+# # Spokane
+# print(larger_dictionary["Washington"][3])
+#
+# largest_dictionary = {
+#     "CA": {
+#         'NAME': "California",
+#         'Population': 39250000,
+#         'BORDER ST': [
+#             'Oregon',
+#             "Nevada",
+#             "Arizona"
+#         ],
+#     },
+#     "MI": {
+#         "NAME": "Michigan",
+#         "POPULATION": 9928000,
+#         "BORDER ST": [
+#             'Wisconsin',
+#             'Ohio',
+#             "Indiana"
+#         ]
+#     },
+#     "FL": {
+#         "NAME": "Florida",
+#         "POPULATION": 2610000,
+#         "BORDER ST": [
+#             'Georgia',
+#             'Alabama'
+#         ]
+#     }
+# }
+# print(largest_dictionary["MI"]["BORDER ST"][1])
+# print(largest_dictionary["FL"]["NAME"])
 
-# Accessing from a dictionary
-print(dictionary['name'])
-print(dictionary['age'])
-print(dictionary['height'])
-
-large_dictionary = {
-    "California": "CA",
-    "Washington": "WA",
-    "Florida": "FL"
-}
-# Adding to a dictionary
-dictionary["eye color"] = "white"
-print(dictionary)
+# Defining Functions
 
 
-print(large_dictionary['Florida'])
+def hello_world():
+    print("Hello World")
 
-larger_dictionary = {
-    "California": [
-        "Fresno",
-        "Sacramento",
-        "Los Angeles"
-    ],
-    "Washington": [
-        "Seattle",
-        "Tacoma",
-        "Olympia",
-        "Spokane"
-    ],
-    "Illinois": [
-        "Chicago",
-        "Naperville",
-        "Peoria"
-    ],
-}
 
-print(larger_dictionary["Illinois"])
-print(larger_dictionary["Illinois"][0])
+hello_world()
 
-# Spokane
-print(larger_dictionary["Washington"][3])
 
-largest_dictionary = {
-    "CA": {
-        'NAME': "California",
-        'Population': 39250000,
-        'BORDER ST': [
-            'Oregon',
-            "Nevada",
-            "Arizona"
-        ],
-    },
-    "MI": {
-        "NAME": "Michigan",
-        "POPULATION": 9928000,
-        "BORDER ST": [
-            'Wisconsin',
-            'Ohio',
-            "Indiana"
-        ]
-    },
-    "FL": {
-        "NAME": "Florida",
-        "POPULATION": 2610000,
-        "BORDER ST": [
-            'Georgia',
-            'Alabama'
-        ]
-    }
-}
-print(largest_dictionary["MI"]["BORDER ST"][1])
-print(largest_dictionary["FL"]["NAME"])
+def square_it(number):
+    return number ** 2
+
+
+print(square_it(3))
+
+for i in range(15):
+    print(square_it(i))
+
+
+def tip_calc(subtotal):
+    tip_amt = subtotal * 0.18  # tip_amt is a local variable
+    print("The tip amount is $%d" % tip_amt)
+    return tip_amt
+
+
+def total_bills(subtotal):
+    total = subtotal + tip_calc(subtotal)
+    return total
+
+
+print(total_bills(100))
+
+
+def distance(x1, y1, x2, y2):
+    inside = (x2-x1) ** 2 + (y2 - y1) ** 2
+    answer = inside ** 0.5
+    return answer
+
+
+print(distance(0, 0, 3, 4))
+
+
