@@ -12,6 +12,9 @@ class Room(object):
         current_node = globals()[getattr(self, direction)]
 
 
+# Rooms
+
+
 parking_lot = Room("Parking Lot", None, None, 'pharmacy', None, "You are in a parking lot, there are no cars and there "
                                                                 "is an open door in the south to Wal-Mart.")
 pharmacy = Room("Pharmacy", 'parking_lot', 'health_and_beauty', 'home', None, "You are in a parking lot, there are no "
@@ -52,6 +55,19 @@ restrooms = Room("Restrooms", None, None, 'books_and_magazines', 'photos', "Ther
 photos = Room("Photos", None, 'restrooms', 'electronics', None, "There are several pictures of families on the wall.")
 electronics = Room("Electronics", 'photos', 'crafts', None, None, "There is an iPhone 20 X on the ground. All the tvs "
                                                                   "are gone.")
+you = Room("Name", None, None, None, None, "You are yourself.")
+
+# Characters
+
+
+# shrek = Characters("Shrek", 'Can yell and damage your hearing, run fast, jump scares, spit acid on you',
+#                    "A tall green man with a bald head and a huge mouth and nose.")
+# ian = Characters("Ian", 'Can tell you where the paths take you',
+#                  "A christian boi who wears glasses and is a faulty Mexican who is also Alek's twin brother.")
+# alek = Characters("Alek", None, "The owner of a Christian minecraft server who is also Ian's twin brother.")
+
+# Controller
+
 directions = ['north', 'east', 'south', 'west']
 current_node = parking_lot
 short_directions = ['n', 'e', 's', 'w']
@@ -65,12 +81,15 @@ while True:
         # Finds the command in short directions (index number)
         pos = short_directions.index(command)
         command = directions[pos]
+    if command == 'meme big boy':
+        print("Memes are bad for you.")
+        quit(0)
     if command == 'hello world':
         print("The world says hi back.")
     if command == 'bitconnect':
         print("BIT-CONNECT!")
-    if command == 'fuck':
-        print("Profanity is not allowed in my game.")
+    if command == 'bad word':
+        print("Not in my Christian minecraft server.")
         quit(0)
     if command in directions:
         try:
