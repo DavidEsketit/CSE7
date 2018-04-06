@@ -35,25 +35,45 @@ class Characters(object):
         self.takeDamage = takeDamage
 
 
-you = Characters("VENOM", 200, 30, 20, 30, "You are yourself.")
+you = Characters("Your Name", 200, 30, 20, 30, "You are yourself")
 shrek = Characters("Shrek", 200, 30, 20, 30, "A tall green man with a bald head and a huge mouth and nose.")
-ian = Characters("Ian", 200, 30, 20, 30, "A christian boi who wears glasses "
-                                         "and is a faulty Mexican who is also Alek's twin brother.")
-alek = Characters("Alek", 200, 30, 20, 30, "The owner of a Christian minecraft server who is also Ian's twin brother.")
-print("There are three characters infront of you. Which would you like to fight?")
 
-while True:
-    characters = [shrek, ian, alek]
-    command = input('>_').lower().strip()
-    current_character = None
-    print(current_character)
-    if command in characters:
-        current_character = command
+print("You are fighting Shrek. He has 200 health and you also have a health of 200.")
 
+
+def description_of_enemy():
+    print("Your enemy is %s" % shrek.description.lower())
+
+
+description_of_enemy()
+
+
+if shrek.health > 0 or you.health > 0:
     def attack():
-        if command == 'attack':
-            current_character.health -= you.damage
-            print(current_character.health)
+        shrek.health -= you.damage
+        print("You have attacked Shrek.")
+        print("Shrek's health is now at %s" % shrek.health)
 
 
     attack()
+
+
+def heal_yourself():
+    print("Healing...")
+    you.health += you.heal
+    print("Your health is now at %s" % you.health)
+
+
+heal_yourself()
+
+
+def take_damage():
+    you.health -= shrek.damage
+    print("Shrek has attacked you.")
+    print("Your health is now at %s" % you.health)
+
+
+take_damage()
+
+
+heal_yourself()
