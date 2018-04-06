@@ -25,23 +25,17 @@ class ExoticA(Armor):  # A stands for Armor
         self.exoticA_factor = exotica_factor
 
 
-class DiamondC(ExoticA):  # C stands for clothing
-    def __init__(self):
-        super(DiamondC, self).__init__('Diamond Clothing',
-                                       'A very heavy clothing but gives you the power to summon diamond walls.',
-                                       100, 'Gives you the power to summon walls that block damage.')
+diamond_clothing = ExoticA('Diamond Clothing',
+                           'A very heavy clothing but gives you the power to summon diamond walls.', 10,
+                           'Gives you the power to summon walls that block damage.')
 
 
-class EmeraldC(ExoticA):
-    def __init__(self):
-        super(EmeraldC, self).__init__('Emerald Clothing', 'A more light weight clothing made out of emerald.', 100,
-                                       'Allows you to deflect 40% of the damage.')
+emerald_clothing = ('Emerald Clothing', 'A more light weight clothing made out of emerald.', 100,
+                    'Allows you to deflect 40% of the damage.')
 
 
-class PlatinumC(ExoticA):
-    def __init__(self):
-        super(PlatinumC, self).__init__('Platinum Clothing', 'A heavy piece of armor that is made of platinum.', 100,
-                                        'Gives you the power to now be affected by common weapons.')
+platinum_clothing = ('Platinum Clothing', 'A heavy piece of armor that is made of platinum.', 100,
+                     'Gives you the power to now be affected by common weapons.')
 
 
 class RareA(Armor):
