@@ -5,6 +5,7 @@
 #       Rooms
 #  Instantiation of classes
 #  Controller
+import random
 
 
 class Item(object):
@@ -210,43 +211,40 @@ common_armor_potion = CommonP('Common Armor Potion',
 
 
 class Characters(object):
-    def __init__(self, name, health, damage, heal, takedamage, description):
+    def __init__(self, name, health, description, attack):
         self.name = name
         self.health = health
         self.description = description
-        self.damage = damage
-        self.heal = heal
-        self.takeDamage = takedamage
+        self.attack = attack
+        self.death = False
 
-    def heal_yourself(self):
-        print("Healing...")
-        you.health += you.heal
-        print("Your health is now at %s" % you.health)
+    def take_damage(self, amount):
+        self.health -= amount
 
-    def take_damage(self):
-        you.health -= shrek.damage
-        print("Shrek has attacked you.")
-        print("Your health is now at %s" % you.health)
+    def swing(self, enemigo):
+        enemigo.take_damage(self.attack)
+        print("You attacked %s." % enemigo.name)
+        if enemigo.health <= 0:
+            enemigo.death = True
+            print("%s died." % enemigo.name)
 
-class Enemies(Characters):
-    def __init__(self):
-        super(Enemies, self).__init__(name, health,)
+    def fight(self, enemigo):
+        print("You start a fight with %s" % enemigo.name)
+
+        while self.health != 0:
+            choice = random.choice([enemigo, self])
+            if choice == self:
+                enemigo.swing(self)
+            elif choice == enemigo:
+                self.swing(enemigo)
 
 
 inventory = []
-you = Characters("Your Name", 200, 30, 20, 30, "You are yourself") and inventory
-shrek = Characters("Shrek", 200, 30, 20, 30, "A tall green man with a bald head and a huge mouth and nose.")
+you = Characters("Your Name", 100, "You are yourself", random.randint(1, 10)) and inventory
+shrek = Characters("Shrek", 100, "A tall green man with a bald head and a huge mouth and nose.",
+                   random.random.randint(1, 20))
 
-
-def description_of_enemy():
-    print("Your enemy is %s" % shrek.description.lower())
-
-
-if shrek.health > 0 or you.health > 0:
-    def attack():
-        shrek.health -= you.damage
-        print("You have attacked Shrek.")
-        print("Shrek's health is now at %s" % shrek.health)
+you.fight(shrek)
 
 # rip your code
 
@@ -338,9 +336,8 @@ while True:
         # Finds the command in short directions (index number)
         pos = short_directions.index(command)
         command = directions[pos]
-    if command == 'heal':
-        you.heal_yourself()
-    if command == 'attack'
+    if command == 'attack':
+        you.fight(shrek)
     if command == 'take':
         if current_node.item_in_room is not None:
             inventory.append(current_node.item_in_room)
