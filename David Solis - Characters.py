@@ -26,13 +26,13 @@ takeDamage
 
 
 class Characters(object):
-    def __init__(self, name, health, damage, heal, takeDamage, description):
+    def __init__(self, name, health, damage, heal, takedamage, description):
         self.name = name
         self.health = health
         self.description = description
         self.damage = damage
         self.heal = heal
-        self.takeDamage = takeDamage
+        self.takeDamage = takedamage
 
 
 you = Characters("Your Name", 200, 30, 20, 30, "You are yourself")
