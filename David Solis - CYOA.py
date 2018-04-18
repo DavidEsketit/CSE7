@@ -140,6 +140,9 @@ shotgun = CommonA('Shotgun', 'A shotgun that does more damage than the average c
 grenade = CommonA('Grenade', 'A grenade that does an instant kill but only if person is close to grenade.', 20,
                   'Can do damage to multiple players at the same time.')
 
+all_armor = [diamond_clothing, emerald_clothing, platinum_clothing, iron_clothing, metal_clothing, wood_clothing,
+             bronze_clothing, chain_clothing, cotton_clothing]
+
 
 class Potion(Item):
     def __init__(self, name, description, potion_ability):
@@ -174,9 +177,9 @@ class RareP(Potion):
         self.rare_factor = rare_factor
 
 
-regular_healing_potion = ('Regular Healing Potion',
-                          'A potion with a yellow tint but not as bright as the Exotic Healing Potion.',
-                          'Can heal a small portion of your health.', 'Heals 20% of your total health.')
+regular_healing_potion = RareP('Regular Healing Potion',
+                               'A potion with a yellow tint but not as bright as the Exotic Healing Potion.',
+                               'Can heal a small portion of your health.', 'Heals 20% of your total health.')
 
 
 damage_potion = RareP('Damage Potion', 'A potion with a bright red tint with smoke coming out of it.',
@@ -184,9 +187,9 @@ damage_potion = RareP('Damage Potion', 'A potion with a bright red tint with smo
                       'Can be thrown at someone and be spread if other people are near.')
 
 
-armor_potion = ('Armor Potion', 'A potion with a blue tint with blue smoke coming out from the top.',
-                'When drunken, it gives you 40% armor.',
-                'Armor can block 20% of any weapon damage.')
+armor_potion = RareP('Armor Potion', 'A potion with a blue tint with blue smoke coming out from the top.',
+                     'When drunken, it gives you 40% armor.',
+                     'Armor can block 20% of any weapon damage.')
 
 
 class CommonP(Potion):
@@ -237,20 +240,18 @@ class Characters(object):
                 enemigo.swing(self)
             elif choice == enemigo:
                 self.swing(enemigo)
+            else:
+                print("Nothing happened.")
 
 
 inventory = []
-you = Characters("Your Name", 100, "You are yourself", random.randint(1, 10)) and inventory
-shrek = Characters("Shrek", 100, "A tall green man with a bald head and a huge mouth and nose.",
-                   random.random.randint(1, 20))
-
-you.fight(shrek)
-
+you = Characters("Your Name", 100, "You are yourself", 10)
+shrek = Characters("Shrek", 100, "A tall green man with a bald head and a huge mouth and nose.", 20)
 # rip your code
 
 
 class Room(object):
-    def __init__(self, name, north, east, south, west, description, item_in_room):
+    def __init__(self, name, north, east, south, west, description, item_in_room, is_shrek_room):
         self.name = name
         self.north = north
         self.east = east
@@ -258,6 +259,7 @@ class Room(object):
         self.west = west
         self.description = description
         self.item_in_room = item_in_room
+        self.is_shrek_room = is_shrek_room
 
     def move(self, direction):
         global current_node
@@ -269,57 +271,58 @@ class Room(object):
 
 parking_lot = Room("Parking Lot", None, None, 'pharmacy', None, "You are in a parking lot, there are no cars and there "
                    "is an open door in the south to Wal-Mart. There is also some clothing on the ground.",
-                   cotton_clothing)
+                   cotton_clothing, None)
 pharmacy = Room("Pharmacy", 'parking_lot', 'health_and_beauty', 'home', None, "You are in a parking lot, there are no "
                 "cars and there is an open door in the south to Wal-Mart. There is also a pistol on the ground.",
-                pistol)
+                pistol, None)
 jewelery = Room("Jewelery", None, None, 'apparel', None, "The jewelery seems to be untouched. To the South of you there"
                 "looks to be like clothes. There is also a grenade lying on the ground which seems to be safe.",
-                grenade)
+                grenade, None)
 home = Room("Home", 'pharmacy', 'toys', None, None, "There is a lot of furniture around you and when you walk on the "
-            "floor is squeaky. There is also a shotgun on a couch.", shotgun)
+            "floor is squeaky. There is also a shotgun on a couch.", shotgun, None)
 toys = Room("Toys", 'lawn_and_garden', 'home', 'sporting_goods', None, "You in a section with toys. There are pretend "
-            "swords and RC cars. There is also some kind of potion in a toy.", regular_healing_potion)
+            "swords and RC cars. There is also some kind of potion in a toy.", regular_healing_potion, None)
 lawn_and_garden = Room("Lawn and Garden", None, None, 'toys', 'cosmetics', "There is one lawn mower left with some soil"
                        "next to it, everything else looks to be old and moldy. There is also a revolver on top of a "
-                       "lawn mower.", revolver)
+                       "lawn mower.", revolver, None)
 cosmetics = Room("Cosmetics", None, 'lawn_and_garden', None, 'health', "All the make up looks untouched. There are "
                  "bushes on the table in front of you. There is also a potion in a makeup box.",
-                 common_damage_potion)
+                 common_damage_potion, None)
 health_and_beauty = Room("Health and Beauty", None, 'cosmetics', None, 'pharmacy', "There is a lot of lotion and your "
                          "skin is dry. There are extensions for your hair lying on the ground. There is also a wierd "
-                         "looking potion on a shelf.", ultra_healing_potion)
+                         "looking potion on a shelf.", ultra_healing_potion, None)
 sporting_goods = Room("Sporting Goods", 'toys', None, 'auto_care', None, "There are multiple bats hung up on the wall. "
                                                                          "There are also some balls on the floor.",
-                      platinum_clothing)
+                      platinum_clothing, None)
 shoes = Room("Shoes", None, None, None, 'apparel', "There are some very comfortable shoes "
-                                                   "called the comfortable shoes 9000.", ray_gun)
+                                                   "called the comfortable shoes 9000.", ray_gun, None)
 baby = Room("Baby", None, 'apparel', 'pets', None, "There is a baby in one of the cribs. There also looks to be "
-                                                   "food to the East of you.", assault_rifle)
+                                                   "food to the East of you.", assault_rifle, None)
 pets = Room("Pets", 'baby', 'paper_and_cleaning', None, 'books_and_magazines', "You are in the pets section. "
                                                                                "There are multiple fish tanks with a "
                                                                                "lot of dead fish in it.",
-            rocket_launcher)
+            rocket_launcher, None)
 paper_and_cleaning = Room("Paper and Cleaning", 'baby', 'groceries', None, 'pets', "There is bleach on the floor "
                                                                                    "and full containers on the shelves."
                                                                                    " There are also some cleaning "
                                                                                    "gloves on the floor.",
-                          suicide_potion)
+                          suicide_potion, None)
 
 groceries = Room("Groceries", None, 'paper_and_cleaning', None, None, "All the food is gone and but there is a lot "
-                                                                      "of water in front of you.", damage_potion)
+                                                                      "of water in front of you.", damage_potion, None)
 apparel = Room("Apparel", 'jewelery', 'shoes', None, 'baby', "There are multiple graphic tees with zombies on them.",
-               common_damage_potion)
+               common_damage_potion, None)
 restrooms = Room("Restrooms", None, None, 'books_and_magazines', 'photos', "There is a toilet in front of you with a "
                                                                            "sink next to it with some soap.",
-                 reviving_potion)
+                 reviving_potion, None)
 photos = Room("Photos", None, 'restrooms', 'electronics', None, "There are several pictures of families on the wall.",
-              metal_clothing)
+              metal_clothing, None)
 electronics = Room("Electronics", 'photos', 'crafts', None, None, "There is an iPhone 20 X on the ground. All the tvs "
-                                                                  "are gone.", common_armor_potion)
+                                                                  "are gone.", common_armor_potion, None)
 
 # Controller
-
+cotton_clothing.armor_amount += you.health
+print(you.health)
 directions = ['north', 'east', 'south', 'west']
 current_node = parking_lot
 short_directions = ['n', 'e', 's', 'w']
@@ -327,44 +330,39 @@ while True:
     print(current_node.name)
     print(current_node.description)
     command = input('>_').lower().strip()
-
     if command == 'quit':
         quit(0)
-
     elif command in short_directions:
         # Finds the command in short directions (index number)
         # Finds the command in short directions (index number)
         pos = short_directions.index(command)
         command = directions[pos]
     if command == 'attack':
-        you.fight(shrek)
+        if current_node.is_shrek_room == shrek:
+            you.fight(shrek)
+        elif current_node.is_shrek_room != shrek:
+            print("There is no one to fight.")
     if command == 'take':
         if current_node.item_in_room is not None:
+            print("You picked up a %s" % current_node.item_in_room.name)
             inventory.append(current_node.item_in_room)
             current_node.item_in_room = None
         elif current_node.item_in_room is None:
             print("There is nothing to take.")
-
     if command == 'meme big boy':
         print("Isn't that from pewdiepie")
-
     if command == 'hello world':
         print("The world says hi back.")
-
     if command == 'bitconnect':
         print("BIT-CONNECT!")
-
     if command == 'bad word':
         print("Not in my Christian minecraft server.")
         quit(0)
-
     if command == 'look':
         print(current_node.description)
-
     if command == 'inventory':
         for i in inventory:
             print(i.name)
-
     if command in directions:
         try:
             current_node.move(command)
