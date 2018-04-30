@@ -142,6 +142,7 @@ grenade = CommonA('Grenade', 'A grenade that does an instant kill but only if pe
 
 all_armor = [diamond_clothing, emerald_clothing, platinum_clothing, iron_clothing, metal_clothing, wood_clothing,
              bronze_clothing, chain_clothing, cotton_clothing]
+all_weapons = [ray_gun, wonder_waffle, ray_gun_mark11, rocket_launcher, assault_rifle, revolver, grenade]
 
 
 class Potion(Item):
@@ -158,16 +159,16 @@ class ExoticP(Potion):
 
 ultra_healing_potion = ExoticP('Ultra Healing Potion',
                                'A magical potion from the unknown that has a yellow glow to it.',
-                               'A potion that significantly heals you.', 'Can recover 60% of your health.')
+                               100, 'Can recover 60% of your health.')
 
 
 reviving_potion = ExoticP('Reviving Potion', 'A potion from the gods that can do the impossible.',
-                          'Can recover 100% of your health.',
+                          100,
                           'If you are dead and have the item in your inventory, this can revive you from the dead.')
 
 
 suicide_potion = ExoticP('Suicide Potion', 'A potion from hell with a devilish look to it.',
-                         'Can kill you in an instant.',
+                         1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
                          'If potion is drunk, you will get text that will say you win')
 
 
@@ -179,16 +180,16 @@ class RareP(Potion):
 
 regular_healing_potion = RareP('Regular Healing Potion',
                                'A potion with a yellow tint but not as bright as the Exotic Healing Potion.',
-                               'Can heal a small portion of your health.', 'Heals 20% of your total health.')
+                               20, 'Heals 20% of your total health.')
 
 
 damage_potion = RareP('Damage Potion', 'A potion with a bright red tint with smoke coming out of it.',
-                      'Can damage other characters by 20% over time.',
+                      20,
                       'Can be thrown at someone and be spread if other people are near.')
 
 
 armor_potion = RareP('Armor Potion', 'A potion with a blue tint with blue smoke coming out from the top.',
-                     'When drunken, it gives you 40% armor.',
+                     40,
                      'Armor can block 20% of any weapon damage.')
 
 
@@ -200,26 +201,33 @@ class CommonP(Potion):
 
 common_healing_potion = CommonP('Common Healing Potion',
                                 'An almost clear looking potion with a very unnoticeable yellow tint.',
-                                'Can heal a small amount of your health.', 'Heals 10% of your health.')
+                                10, 'Heals 10% of your health.')
 
 
 common_damage_potion = CommonP('Common Damage Potion', 'A potion that looks very devilish.',
-                               'Can deal a small amount of damage to another character''s health.',
+                               10,
                                'Does 10% damage to any_nearby enemy.')
 
 
 common_armor_potion = CommonP('Common Armor Potion',
                               'A potion that looks like hte fortnite potion that gives you of armor.',
-                              'Can add a small amount of health to your armor.', 'Adds 10% of health to your armor.')
+                              10, 'Adds 10% of health to your armor.')
+
+healing_potions = [ultra_healing_potion, regular_healing_potion, common_healing_potion]
+armor_potions = [armor_potion, common_armor_potion]
+damage_potions = [suicide_potion, damage_potion, armor_potion, common_armor_potion]
+all_potions = [ultra_healing_potion, regular_healing_potion, common_healing_potion, armor_potion, common_armor_potion,
+               suicide_potion, damage_potion, armor_potion, common_armor_potion]
 
 
 class Characters(object):
-    def __init__(self, name, health, description, attack):
+    def __init__(self, name, health, description, attack, armor):
         self.name = name
         self.health = health
         self.description = description
         self.attack = attack
         self.death = False
+        self.armor = armor
 
     def take_damage(self, amount):
         self.health -= amount
@@ -244,9 +252,15 @@ class Characters(object):
                 print("Nothing happened.")
 
 
-inventory = []
-you = Characters("Your Name", 100, "You are yourself", 10)
-shrek = Characters("Shrek", 100, "A tall green man with a bald head and a huge mouth and nose.", 20)
+class Inventory:
+    def __init__(self, weapon, armor, potion):
+        self.weapon = weapon
+        self.armor = armor
+        self.potion = potion
+
+
+you = Characters("Your Name", 100, "You are yourself", 10, 0)
+shrek = Characters("Shrek", 100, "A tall green man with a bald head and a huge mouth and nose.", 20, 100)
 # rip your code
 
 
@@ -291,11 +305,11 @@ cosmetics = Room("Cosmetics", None, 'lawn_and_garden', None, 'health', "All the 
 health_and_beauty = Room("Health and Beauty", None, 'cosmetics', None, 'pharmacy', "There is a lot of lotion and your "
                          "skin is dry. There are extensions for your hair lying on the ground. There is also a wierd "
                          "looking potion on a shelf.", ultra_healing_potion, None)
-sporting_goods = Room("Sporting Goods", 'toys', None, 'auto_care', None, "There are multiple bats hung up on the wall. "
-                                                                         "There are also some balls on the floor.",
+sporting_goods = Room("Sporting Goods", 'toys', None, 'shoes', None,
+                      "There are multiple bats hung up on the wall. There are also some balls on the floor.",
                       platinum_clothing, None)
-shoes = Room("Shoes", None, None, None, 'apparel', "There are some very comfortable shoes "
-                                                   "called the comfortable shoes 9000.", ray_gun, None)
+shoes = Room("Shoes", 'sporting_goods', None, None, 'apparel',
+             "There are some very comfortable shoes called the comfortable shoes 9000.", ray_gun, None)
 baby = Room("Baby", None, 'apparel', 'pets', None, "There is a baby in one of the cribs. There also looks to be "
                                                    "food to the East of you.", assault_rifle, None)
 pets = Room("Pets", 'baby', 'paper_and_cleaning', None, 'books_and_magazines', "You are in the pets section. "
@@ -317,12 +331,11 @@ restrooms = Room("Restrooms", None, None, 'books_and_magazines', 'photos', "Ther
                  reviving_potion, None)
 photos = Room("Photos", None, 'restrooms', 'electronics', None, "There are several pictures of families on the wall.",
               metal_clothing, None)
-electronics = Room("Electronics", 'photos', 'crafts', None, None, "There is an iPhone 20 X on the ground. All the tvs "
-                                                                  "are gone.", common_armor_potion, None)
+electronics = Room("Electronics", 'photos', None, None, None,
+                   "There is an iPhone 20 X on the ground. All the tvs are gone.", common_armor_potion, None)
 
+inventory = Inventory(None, None, None)
 # Controller
-cotton_clothing.armor_amount += you.health
-print(you.health)
 directions = ['north', 'east', 'south', 'west']
 current_node = parking_lot
 short_directions = ['n', 'e', 's', 'w']
@@ -343,12 +356,36 @@ while True:
         elif current_node.is_shrek_room != shrek:
             print("There is no one to fight.")
     if command == 'take':
-        if current_node.item_in_room is not None:
+        if current_node.item_in_room in all_armor:
             print("You picked up a %s" % current_node.item_in_room.name)
-            inventory.append(current_node.item_in_room)
+            inventory.armor = current_node.item_in_room
+            you.armor += inventory.armor.armor_amount
             current_node.item_in_room = None
-        elif current_node.item_in_room is None:
+        elif current_node.item_in_room in all_weapons:
+            print("You picked up a %s" % current_node.item_in_room.name)
+            inventory.weapon = current_node.item_in_room
+            you.attack += inventory.weapon.damage_amount
+            current_node.item_in_room = None
+        elif current_node.item_in_room in all_potions:
+            print("You picked up %s" % current_node.item_in_room.name)
+            inventory.potion = current_node.item_in_room
+            current_node.item_in_room = None
+        else:
             print("There is nothing to take.")
+    if command == 'drink potion':
+        if inventory.potion in healing_potions:
+            you.health += inventory.potion.potion_ability
+            inventory.potion = None
+        elif inventory.potion in damage_potions:
+            you.attack += inventory.potion.potion_ability
+            inventory.potion = None
+        elif inventory.potion in armor_potions:
+            you.armor += inventory.potion.potion_ability
+            inventory.potion = None
+        else:
+            print("You have no potion to drink.")
+    if command == 'health':
+        print("You have %s health and %s armor." % (you.health, you.armor))
     if command == 'meme big boy':
         print("Isn't that from pewdiepie")
     if command == 'hello world':
@@ -361,8 +398,18 @@ while True:
     if command == 'look':
         print(current_node.description)
     if command == 'inventory':
-        for i in inventory:
-            print(i.name)
+        if inventory.armor is not None:
+            print(inventory.armor.name)
+        else:
+            print("You don't have armor.")
+        if inventory.weapon is not None:
+            print(inventory.weapon.name)
+        else:
+            print("You don't have a weapon.")
+        if inventory.potion is not None:
+            print(inventory.potion.name)
+        else:
+            print("You don't have armor.")
     if command in directions:
         try:
             current_node.move(command)
