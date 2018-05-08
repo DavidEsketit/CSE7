@@ -9,123 +9,124 @@ import random
 
 
 class Item(object):
-    def __init__(self, name, description):
+    def __init__(self, name, description, value):
         self.name = name
         self.description = description
+        self.value = value
 
 
 class Armor(Item):
-    def __init__(self, name, description, armor_amount):
-        super(Armor, self).__init__(name, description)
+    def __init__(self, name, description, value, armor_amount):
+        super(Armor, self).__init__(name, description, value)
         self.armor_amount = armor_amount
 
 
 class ExoticA(Armor):  # A stands for Armor
-    def __init__(self, name, description, armor_amount, exotica_factor):
-        super(ExoticA, self).__init__(name, description, armor_amount)
+    def __init__(self, name, description, value, armor_amount, exotica_factor):
+        super(ExoticA, self).__init__(name, description, value, armor_amount)
         self.exoticA_factor = exotica_factor
 
 
 diamond_clothing = ExoticA('Diamond Clothing',
-                           'A very heavy clothing but gives you the power to summon diamond walls.', 10,
+                           'A very heavy clothing but gives you the power to summon diamond walls.', 500, 100,
                            'Gives you the power to summon walls that block damage.')
 
 
 emerald_clothing = ExoticA('Emerald Clothing',
-                           'A more light weight clothing made out of emerald.', 100,
+                           'A more light weight clothing made out of emerald.', 500, 100,
                            'Allows you to deflect 40% of the damage.')
 
 
 platinum_clothing = ExoticA('Platinum Clothing',
-                            'A heavy piece of armor that is made of platinum.', 100,
+                            'A heavy piece of armor that is made of platinum.', 500, 100,
                             'Gives you the power to now be affected by common weapons.')
 
 
 class RareA(Armor):
-    def __init__(self, name, description, armor_amount, rarea_factor):
-        super(RareA, self).__init__(name, description, armor_amount)
+    def __init__(self, name, description, value, armor_amount, rarea_factor):
+        super(RareA, self).__init__(name, description, value, armor_amount)
         self.rareA_factor = rarea_factor
 
 
 iron_clothing = RareA('Iron Clothing',
-                      'A reasonable weight armor that is made of Iron', 50,
+                      'A reasonable weight armor that is made of Iron', 280, 50,
                       'Can block 20% of the damage from any weapon except exotic weapons.')
 
 
 metal_clothing = RareA('Metal Clothing',
-                       'An armor made out of metal on the more heavy side.', 60,
+                       'An armor made out of metal on the more heavy side.', 300, 60,
                        'Can block 25% of the damage from any weapon except exotic weapons.')
 
 
 wood_clothing = RareA('Wood Clothing',
-                      'An armor made out of wood that is very light weight.', 40,
+                      'An armor made out of wood that is very light weight.', 250, 40,
                       'Can block 15% of the damage from any weapon except exotic weapons.')
 
 
 class CommonA(Armor):
-    def __init__(self, name, description, armor_amount, commona_factor):
-        super(CommonA, self).__init__(name, description, armor_amount)
+    def __init__(self, name, description, value, armor_amount, commona_factor):
+        super(CommonA, self).__init__(name, description, value, armor_amount)
         self.commonA_factor = commona_factor
 
 
-cotton_clothing = CommonA('Cotton Clothing', 'A regular t-shirt.', 0,
+cotton_clothing = CommonA('Cotton Clothing', 'A regular t-shirt.', 0, 0,
                           'Has a 0.0000000001% chance that you will become invincible to everything.')
 
 
 bronze_clothing = CommonA('Bronze Clothing',
-                          'A light weight armor that is made out of bronze.', 20,
+                          'A light weight armor that is made out of bronze.', 100, 20,
                           'Can block 10% of damage conflicted by anything except exotic weapons.')
 
 
-chain_clothing = CommonA('Chain Clothing', 'An armor made out of chain.', 10,
+chain_clothing = CommonA('Chain Clothing', 'An armor made out of chain.', 50, 10,
                          'Can block 5% of damage conflicted by anything expect exotic weapons.')
 
 
 class Weapon(Item):
-    def __init__(self, name, description, damage_amount):
-        super(Weapon, self).__init__(name, description)
+    def __init__(self, name, description, value, damage_amount):
+        super(Weapon, self).__init__(name, description, value)
         self.damage_amount = damage_amount
 
 
 class ExoticW(Weapon):
-    def __init__(self, name, description, damage_amount, exoticw_factor):
-        super(ExoticW, self).__init__(name, description, damage_amount)
+    def __init__(self, name, description, value, damage_amount, exoticw_factor):
+        super(ExoticW, self).__init__(name, description, value, damage_amount)
         self.exoticW_factor = exoticw_factor
 
 
-ray_gun = ExoticW('Ray Gun', 'A gun from the game called Call of Duty: Black Ops', 40,
+ray_gun = ExoticW('Ray Gun', 'A gun from the game called Call of Duty: Black Ops', 600, 40,
                   'The most powerful weapon known to mankind.')
 
 
-wonder_waffle = ExoticW('Wonder Waffle', 'A gun from the game called Call of Duty: Black Ops', 40,
+wonder_waffle = ExoticW('Wonder Waffle', 'A gun from the game called Call of Duty: Black Ops', 560, 40,
                         'Blows things away from you and also does instant kills but takes 20 seconds to reload.')
 
 
-ray_gun_mark11 = ExoticW('Ray Gun Mark II', 'A gun from the game called Call of Duty: Black Ops', 40,
+ray_gun_mark11 = ExoticW('Ray Gun Mark II', 'A gun from the game called Call of Duty: Black Ops', 550, 40,
                          'Has a 20% chance that gun will nuke the Wal-Mart and win the game for you.')
 
 
 class RareW(Weapon):
-    def __init__(self, name, description, damage_amount, rarew_factor):
-        super(RareW, self).__init__(name, description, damage_amount)
+    def __init__(self, name, description, value, damage_amount, rarew_factor):
+        super(RareW, self).__init__(name, description, value, damage_amount)
         self.rareW_factor = rarew_factor
 
 
-rocket_launcher = RareW('Rocket Launcher', 'A long damage dealing weapon that launches rockets.', 30,
+rocket_launcher = RareW('Rocket Launcher', 'A long damage dealing weapon that launches rockets.', 300, 30,
                         'Also damages nearby enemies caught or near the blast of the rocket.')
 
 
-assault_rifle = RareW('Assault Rifle', 'An automatic rifle that does quite a bit of damage.', 30,
+assault_rifle = RareW('Assault Rifle', 'An automatic rifle that does quite a bit of damage.', 280, 30,
                       'Can shoot faster than any other weapon in the game.')
 
 
-revolver = RareW('Revolver', 'A damage dealing pistol that with 6 bullets.', 30,
+revolver = RareW('Revolver', 'A damage dealing pistol that with 6 bullets.', 250, 30,
                  'Can shoot the all rounds in less than one second like McCree from Overwatch.')
 
 
 class CommonW(Weapon):
-    def __init__(self, name, description, damage_amount, commonw_factor):
-        super(CommonW, self).__init__(name, description, damage_amount)
+    def __init__(self, name, description, value, damage_amount, commonw_factor):
+        super(CommonW, self).__init__(name, description, value, damage_amount)
         self.commonW_factor = commonw_factor
 
 
@@ -232,25 +233,6 @@ class Characters(object):
     def take_damage(self, amount):
         self.health -= amount
 
-    def swing(self, enemigo):
-        enemigo.take_damage(self.attack)
-        print("You attacked %s." % enemigo.name)
-        if enemigo.health <= 0:
-            enemigo.death = True
-            print("%s died." % enemigo.name)
-
-    def fight(self, enemigo):
-        print("You start a fight with %s" % enemigo.name)
-
-        while self.health != 0:
-            choice = random.choice([enemigo, self])
-            if choice == self:
-                enemigo.swing(self)
-            elif choice == enemigo:
-                self.swing(enemigo)
-            else:
-                print("Nothing happened.")
-
 
 class Inventory:
     def __init__(self, weapon, armor, potion):
@@ -259,7 +241,7 @@ class Inventory:
         self.potion = potion
 
 
-you = Characters("Your Name", 100, "You are yourself", 10, 0)
+you = Characters("Your Name", 100, "You are yourself", 1000000000, 0)
 shrek = Characters("Shrek", 100, "A tall green man with a bald head and a huge mouth and nose.", 20, 100)
 # rip your code
 
@@ -285,7 +267,7 @@ class Room(object):
 
 parking_lot = Room("Parking Lot", None, None, 'pharmacy', None, "You are in a parking lot, there are no cars and there "
                    "is an open door in the south to Wal-Mart. There is also some clothing on the ground.",
-                   cotton_clothing, None)
+                   cotton_clothing, shrek)
 pharmacy = Room("Pharmacy", 'parking_lot', 'health_and_beauty', 'home', None, "You are in a parking lot, there are no "
                 "cars and there is an open door in the south to Wal-Mart. There is also a pistol on the ground.",
                 pistol, None)
@@ -334,87 +316,165 @@ photos = Room("Photos", None, 'restrooms', 'electronics', None, "There are sever
 electronics = Room("Electronics", 'photos', None, None, None,
                    "There is an iPhone 20 X on the ground. All the tvs are gone.", common_armor_potion, None)
 
+all_rooms = [parking_lot, pharmacy, jewelery, home, toys, lawn_and_garden, cosmetics, health_and_beauty, sporting_goods,
+             shoes, baby, pets, paper_and_cleaning, groceries, apparel, restrooms, photos, electronics]
 inventory = Inventory(None, None, None)
 # Controller
+all_commands = ['north', 'east', 'south', 'west', 'n', 'e', 's', 'w', 'quit', 'attack', 'take', 'drink potion',
+                'drop weapon', 'drop potion', 'drop armor', 'health', 'meme big boy', 'bitconnect', 'bad word', 'look',
+                'inventory']
+all_items_in_rooms = [cotton_clothing, pistol, grenade, shotgun, regular_healing_potion, revolver, common_damage_potion,
+                      ultra_healing_potion, platinum_clothing, ray_gun, assault_rifle, rocket_launcher, suicide_potion,
+                      damage_potion, common_damage_potion, reviving_potion, metal_clothing, common_armor_potion]
+store_items = [bronze_clothing, chain_clothing, emerald_clothing, diamond_clothing, iron_clothing, metal_clothing,
+               wood_clothing, wonder_waffle, ray_gun_mark11]
+shrek_location = random.choice(all_rooms)
 directions = ['north', 'east', 'south', 'west']
 current_node = parking_lot
 short_directions = ['n', 'e', 's', 'w']
 while True:
     print(current_node.name)
     print(current_node.description)
+    shrek_dead = 'false'
     command = input('>_').lower().strip()
+    if you.health <= 0:
+        print("You have died")
+        quit()
     if command == 'quit':
         quit(0)
+
     elif command in short_directions:
         # Finds the command in short directions (index number)
         # Finds the command in short directions (index number)
         pos = short_directions.index(command)
         command = directions[pos]
+    if command == 'shop':
+        print("")
     if command == 'attack':
-        if current_node.is_shrek_room == shrek:
-            you.fight(shrek)
-        elif current_node.is_shrek_room != shrek:
-            print("There is no one to fight.")
+        take_damage_or_no = random.randint(0, 1)
+        if current_node.is_shrek_room is shrek:
+            if shrek.health >= 0:
+                if inventory.armor in all_armor and inventory.armor.armor_amount > 0:
+                    inventory.armor -= shrek.attack
+                    print("Pew pew!")
+                    print("Shrek has lost %s health." % you.attack)
+                elif inventory.armor not in all_armor or inventory.armor.armor_amount <= 0:
+                    shrek.health -= you.attack
+                    print("Pew pew!")
+                    print("Shrek has lost %s health" % you.attack)
+                if inventory.armor in all_armor and inventory.armor.armor_amount > 0:
+                        if take_damage_or_no == 1:
+                            inventory.armor.armor_amount -= shrek.attack
+                            print("Shrek attacked back for %s" % shrek.attack)
+                        else:
+                            print("Shrek attacked back but you were able to block it.")
+                elif inventory.armor not in all_armor or inventory.armor.armor_amount <= 0:
+                        if take_damage_or_no == 1:
+                            you.health -= shrek.attack
+                            print("Shrek attacked back for %s" % shrek.attack)
+                        else:
+                            print("Shrek attacked back but you were able to shield it with your mighty armor.")
+        else:
+            print("Shrek is not in the room.")
+        if shrek.health <= 0 and shrek_dead == 'false':
+            shrek_dead = 'true'
+            current_node.is_shrek_room = None
+            shrek_location.is_shrek_room = shrek
+            print("Shrek is dead and has been resurrected by the Devil and is in a different room.")
+
     if command == 'take':
         if current_node.item_in_room in all_armor:
             print("You picked up a %s" % current_node.item_in_room.name)
             inventory.armor = current_node.item_in_room
             you.armor += inventory.armor.armor_amount
             current_node.item_in_room = None
+
         elif current_node.item_in_room in all_weapons:
             print("You picked up a %s" % current_node.item_in_room.name)
             inventory.weapon = current_node.item_in_room
             you.attack += inventory.weapon.damage_amount
             current_node.item_in_room = None
+
         elif current_node.item_in_room in all_potions:
             print("You picked up %s" % current_node.item_in_room.name)
             inventory.potion = current_node.item_in_room
             current_node.item_in_room = None
+
         else:
             print("There is nothing to take.")
+
     if command == 'drink potion':
         if inventory.potion in healing_potions:
             you.health += inventory.potion.potion_ability
             inventory.potion = None
+
         elif inventory.potion in damage_potions:
             you.attack += inventory.potion.potion_ability
             inventory.potion = None
+
         elif inventory.potion in armor_potions:
             you.armor += inventory.potion.potion_ability
             inventory.potion = None
+
         else:
             print("You have no potion to drink.")
+
+    if command == 'drop weapon':
+        current_node.item_in_room = inventory.weapon
+        inventory.weapon = None
+
+    if command == 'drop potion':
+        current_node.item_in_room = inventory.potion
+        inventory.potion = None
+
+    if command == 'drop armor':
+        current_node.item_in_room = inventory.armor
+        inventory.armor = None
+
     if command == 'health':
         print("You have %s health and %s armor." % (you.health, you.armor))
+
     if command == 'meme big boy':
         print("Isn't that from pewdiepie")
+
     if command == 'hello world':
         print("The world says hi back.")
+
     if command == 'bitconnect':
         print("BIT-CONNECT!")
+
     if command == 'bad word':
         print("Not in my Christian minecraft server.")
         quit(0)
+
     if command == 'look':
         print(current_node.description)
+
     if command == 'inventory':
         if inventory.armor is not None:
             print(inventory.armor.name)
+
         else:
             print("You don't have armor.")
+
         if inventory.weapon is not None:
             print(inventory.weapon.name)
+
         else:
             print("You don't have a weapon.")
+
         if inventory.potion is not None:
             print(inventory.potion.name)
+
         else:
             print("You don't have armor.")
+
     if command in directions:
         try:
             current_node.move(command)
         except KeyError:
             print("You cannot go that way")
-    elif command is not True:
+
+    elif command not in all_commands:
         print("Command not found.")
     print()
