@@ -9,137 +9,138 @@ import random
 
 
 class Item(object):
-    def __init__(self, name, description, value):
+    def __init__(self, name, description, value, shop_number):
         self.name = name
         self.description = description
         self.value = value
+        self.shop_number = shop_number
 
 
 class Armor(Item):
-    def __init__(self, name, description, value, armor_amount):
-        super(Armor, self).__init__(name, description, value)
+    def __init__(self, name, description, value, shop_number, armor_amount):
+        super(Armor, self).__init__(name, description, value, shop_number)
         self.armor_amount = armor_amount
 
 
 class ExoticA(Armor):  # A stands for Armor
-    def __init__(self, name, description, value, armor_amount, exotica_factor):
-        super(ExoticA, self).__init__(name, description, value, armor_amount)
+    def __init__(self, name, description, value, shop_number, armor_amount, exotica_factor):
+        super(ExoticA, self).__init__(name, description, value, shop_number, armor_amount)
         self.exoticA_factor = exotica_factor
 
 
 diamond_clothing = ExoticA('Diamond Clothing',
-                           'A very heavy clothing but gives you the power to summon diamond walls.', 500, 100,
+                           'A very heavy clothing but gives you the power to summon diamond walls.', 500, 4, 100,
                            'Gives you the power to summon walls that block damage.')
 
 
 emerald_clothing = ExoticA('Emerald Clothing',
-                           'A more light weight clothing made out of emerald.', 500, 100,
+                           'A more light weight clothing made out of emerald.', 500, 3, 100,
                            'Allows you to deflect 40% of the damage.')
 
 
 platinum_clothing = ExoticA('Platinum Clothing',
-                            'A heavy piece of armor that is made of platinum.', 500, 100,
+                            'A heavy piece of armor that is made of platinum.', 500, None, 100,
                             'Gives you the power to now be affected by common weapons.')
 
 
 class RareA(Armor):
-    def __init__(self, name, description, value, armor_amount, rarea_factor):
-        super(RareA, self).__init__(name, description, value, armor_amount)
+    def __init__(self, name, description, value, shop_number, armor_amount, rarea_factor):
+        super(RareA, self).__init__(name, description, value, shop_number, armor_amount)
         self.rareA_factor = rarea_factor
 
 
 iron_clothing = RareA('Iron Clothing',
-                      'A reasonable weight armor that is made of Iron', 280, 50,
+                      'A reasonable weight armor that is made of Iron', 280, 5, 50,
                       'Can block 20% of the damage from any weapon except exotic weapons.')
 
 
 metal_clothing = RareA('Metal Clothing',
-                       'An armor made out of metal on the more heavy side.', 300, 60,
+                       'An armor made out of metal on the more heavy side.', 300, 6, 60,
                        'Can block 25% of the damage from any weapon except exotic weapons.')
 
 
 wood_clothing = RareA('Wood Clothing',
-                      'An armor made out of wood that is very light weight.', 250, 40,
+                      'An armor made out of wood that is very light weight.', 250, 7, 40,
                       'Can block 15% of the damage from any weapon except exotic weapons.')
 
 
 class CommonA(Armor):
-    def __init__(self, name, description, value, armor_amount, commona_factor):
-        super(CommonA, self).__init__(name, description, value, armor_amount)
+    def __init__(self, name, description, value, shop_number, armor_amount, commona_factor):
+        super(CommonA, self).__init__(name, description, value, shop_number, armor_amount)
         self.commonA_factor = commona_factor
 
 
-cotton_clothing = CommonA('Cotton Clothing', 'A regular t-shirt.', 0, 0,
+cotton_clothing = CommonA('Cotton Clothing', 'A regular t-shirt.', 0, None, 0,
                           'Has a 0.0000000001% chance that you will become invincible to everything.')
 
 
 bronze_clothing = CommonA('Bronze Clothing',
-                          'A light weight armor that is made out of bronze.', 100, 20,
+                          'A light weight armor that is made out of bronze.', 100, 1, 20,
                           'Can block 10% of damage conflicted by anything except exotic weapons.')
 
 
-chain_clothing = CommonA('Chain Clothing', 'An armor made out of chain.', 50, 10,
+chain_clothing = CommonA('Chain Clothing', 'An armor made out of chain.', 50, 2, 10,
                          'Can block 5% of damage conflicted by anything expect exotic weapons.')
 
 
 class Weapon(Item):
-    def __init__(self, name, description, value, damage_amount):
-        super(Weapon, self).__init__(name, description, value)
+    def __init__(self, name, description, value, shop_number, damage_amount):
+        super(Weapon, self).__init__(name, description, value, shop_number)
         self.damage_amount = damage_amount
 
 
 class ExoticW(Weapon):
-    def __init__(self, name, description, value, damage_amount, exoticw_factor):
-        super(ExoticW, self).__init__(name, description, value, damage_amount)
+    def __init__(self, name, description, value, shop_number, damage_amount, exoticw_factor):
+        super(ExoticW, self).__init__(name, description, value, shop_number, damage_amount)
         self.exoticW_factor = exoticw_factor
 
 
-ray_gun = ExoticW('Ray Gun', 'A gun from the game called Call of Duty: Black Ops', 600, 40,
+ray_gun = ExoticW('Ray Gun', 'A gun from the game called Call of Duty: Black Ops', 600, None, 40,
                   'The most powerful weapon known to mankind.')
 
 
-wonder_waffle = ExoticW('Wonder Waffle', 'A gun from the game called Call of Duty: Black Ops', 560, 40,
+wonder_waffle = ExoticW('Wonder Waffle', 'A gun from the game called Call of Duty: Black Ops', 560, 8, 40,
                         'Blows things away from you and also does instant kills but takes 20 seconds to reload.')
 
 
-ray_gun_mark11 = ExoticW('Ray Gun Mark II', 'A gun from the game called Call of Duty: Black Ops', 550, 40,
+ray_gun_mark11 = ExoticW('Ray Gun Mark II', 'A gun from the game called Call of Duty: Black Ops', 550, 9, 40,
                          'Has a 20% chance that gun will nuke the Wal-Mart and win the game for you.')
 
 
 class RareW(Weapon):
-    def __init__(self, name, description, value, damage_amount, rarew_factor):
-        super(RareW, self).__init__(name, description, value, damage_amount)
+    def __init__(self, name, description, value, shop_number, damage_amount, rarew_factor):
+        super(RareW, self).__init__(name, description, value, shop_number, damage_amount)
         self.rareW_factor = rarew_factor
 
 
-rocket_launcher = RareW('Rocket Launcher', 'A long damage dealing weapon that launches rockets.', 300, 30,
+rocket_launcher = RareW('Rocket Launcher', 'A long damage dealing weapon that launches rockets.', 300, None, 30,
                         'Also damages nearby enemies caught or near the blast of the rocket.')
 
 
-assault_rifle = RareW('Assault Rifle', 'An automatic rifle that does quite a bit of damage.', 280, 30,
+assault_rifle = RareW('Assault Rifle', 'An automatic rifle that does quite a bit of damage.', 280, None, 30,
                       'Can shoot faster than any other weapon in the game.')
 
 
-revolver = RareW('Revolver', 'A damage dealing pistol that with 6 bullets.', 250, 30,
+revolver = RareW('Revolver', 'A damage dealing pistol that with 6 bullets.', 250, None, 30,
                  'Can shoot the all rounds in less than one second like McCree from Overwatch.')
 
 
 class CommonW(Weapon):
-    def __init__(self, name, description, value, damage_amount, commonw_factor):
-        super(CommonW, self).__init__(name, description, value, damage_amount)
+    def __init__(self, name, description, value, shop_number, damage_amount, commonw_factor):
+        super(CommonW, self).__init__(name, description, value, shop_number, damage_amount)
         self.commonW_factor = commonw_factor
 
 
-pistol = CommonA('Pistol', 'A semi-automatic pistol with 16 bullets in each magazine.', 10,
+pistol = CommonA('Pistol', 'A semi-automatic pistol with 16 bullets in each magazine.', 100, None, 10,
                  'Can only shoot once at a time.')
 
 
-shotgun = CommonA('Shotgun', 'A shotgun that does more damage than the average common weapon.', 15,
+shotgun = CommonA('Shotgun', 'A shotgun that does more damage than the average common weapon.', 130, None, 15,
                   'Can shoot multiple people wih on shot.')
 
 
-grenade = CommonA('Grenade', 'A grenade that does an instant kill but only if person is close to grenade.', 20,
-                  'Can do damage to multiple players at the same time.')
+grenade = CommonA('Grenade', 'A grenade that does an instant kill but only if person is close to grenade.', 150, None,
+                  20, 'Can do damage to multiple players at the same time.')
 
 all_armor = [diamond_clothing, emerald_clothing, platinum_clothing, iron_clothing, metal_clothing, wood_clothing,
              bronze_clothing, chain_clothing, cotton_clothing]
@@ -147,72 +148,71 @@ all_weapons = [ray_gun, wonder_waffle, ray_gun_mark11, rocket_launcher, assault_
 
 
 class Potion(Item):
-    def __init__(self, name, description, potion_ability):
-        super(Potion, self).__init__(name, description)
+    def __init__(self, name, description, value, shop_number, potion_ability):
+        super(Potion, self).__init__(name, description, value, shop_number)
         self.potion_ability = potion_ability
 
 
 class ExoticP(Potion):
-    def __init__(self, name, description, potion_ability, exoticp_factor):
-        super(ExoticP, self).__init__(name, description, potion_ability)
+    def __init__(self, name, description, value, shop_number, potion_ability, exoticp_factor):
+        super(ExoticP, self).__init__(name, description, value, shop_number, potion_ability)
         self.exoticP_factor = exoticp_factor
 
 
 ultra_healing_potion = ExoticP('Ultra Healing Potion',
-                               'A magical potion from the unknown that has a yellow glow to it.',
+                               'A magical potion from the unknown that has a yellow glow to it.', 500, None,
                                100, 'Can recover 60% of your health.')
 
 
-reviving_potion = ExoticP('Reviving Potion', 'A potion from the gods that can do the impossible.',
+reviving_potion = ExoticP('Reviving Potion', 'A potion from the gods that can do the impossible.', 600, None,
                           100,
                           'If you are dead and have the item in your inventory, this can revive you from the dead.')
 
 
-suicide_potion = ExoticP('Suicide Potion', 'A potion from hell with a devilish look to it.',
+suicide_potion = ExoticP('Suicide Potion', 'A potion from hell with a devilish look to it.', 1000, None,
                          1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
                          'If potion is drunk, you will get text that will say you win')
 
 
 class RareP(Potion):
-    def __init__(self, name, description, potion_ability, rare_factor):
-        super(RareP, self).__init__(name, description, potion_ability)
+    def __init__(self, name, description, value, shop_number, potion_ability, rare_factor):
+        super(RareP, self).__init__(name, description, value, shop_number, potion_ability)
         self.rare_factor = rare_factor
 
 
 regular_healing_potion = RareP('Regular Healing Potion',
-                               'A potion with a yellow tint but not as bright as the Exotic Healing Potion.',
+                               'A potion with a yellow tint but not as bright as the Exotic Healing Potion.', 300, None,
                                20, 'Heals 20% of your total health.')
 
 
 damage_potion = RareP('Damage Potion', 'A potion with a bright red tint with smoke coming out of it.',
-                      20,
+                      280, None, 20,
                       'Can be thrown at someone and be spread if other people are near.')
 
 
 armor_potion = RareP('Armor Potion', 'A potion with a blue tint with blue smoke coming out from the top.',
-                     40,
+                     320, None, 40,
                      'Armor can block 20% of any weapon damage.')
 
 
 class CommonP(Potion):
-    def __init__(self, name, description, potion_ability, common_factor):
-        super(CommonP, self).__init__(name, description, potion_ability)
+    def __init__(self, name, description, value, shop_number, potion_ability, common_factor):
+        super(CommonP, self).__init__(name, description, value, shop_number, potion_ability)
         self.common_factor = common_factor
 
 
 common_healing_potion = CommonP('Common Healing Potion',
                                 'An almost clear looking potion with a very unnoticeable yellow tint.',
-                                10, 'Heals 10% of your health.')
+                                10, None, 200, 'Heals 10% of your health.')
 
 
 common_damage_potion = CommonP('Common Damage Potion', 'A potion that looks very devilish.',
-                               10,
-                               'Does 10% damage to any_nearby enemy.')
+                               10, None, 180, 'Does 10% damage to any_nearby enemy.')
 
 
 common_armor_potion = CommonP('Common Armor Potion',
                               'A potion that looks like hte fortnite potion that gives you of armor.',
-                              10, 'Adds 10% of health to your armor.')
+                              10, None, 210, 'Adds 10% of health to your armor.')
 
 healing_potions = [ultra_healing_potion, regular_healing_potion, common_healing_potion]
 armor_potions = [armor_potion, common_armor_potion]
@@ -222,13 +222,14 @@ all_potions = [ultra_healing_potion, regular_healing_potion, common_healing_poti
 
 
 class Characters(object):
-    def __init__(self, name, health, description, attack, armor):
+    def __init__(self, name, health, description, attack, armor, dinero):
         self.name = name
         self.health = health
         self.description = description
         self.attack = attack
         self.death = False
         self.armor = armor
+        self.dinero = dinero
 
     def take_damage(self, amount):
         self.health -= amount
@@ -241,8 +242,8 @@ class Inventory:
         self.potion = potion
 
 
-you = Characters("Your Name", 100, "You are yourself", 1000000000, 0)
-shrek = Characters("Shrek", 100, "A tall green man with a bald head and a huge mouth and nose.", 20, 100)
+you = Characters("Your Name", 100, "You are yourself", 1000000000, 0, 1000000000000000000000000000000000000000000000000)
+shrek = Characters("Shrek", 100, "A tall green man with a bald head and a huge mouth and nose.", 20, 100, None)
 # rip your code
 
 
@@ -320,9 +321,10 @@ all_rooms = [parking_lot, pharmacy, jewelery, home, toys, lawn_and_garden, cosme
              shoes, baby, pets, paper_and_cleaning, groceries, apparel, restrooms, photos, electronics]
 inventory = Inventory(None, None, None)
 # Controller
+
 all_commands = ['north', 'east', 'south', 'west', 'n', 'e', 's', 'w', 'quit', 'attack', 'take', 'drink potion',
                 'drop weapon', 'drop potion', 'drop armor', 'health', 'meme big boy', 'bitconnect', 'bad word', 'look',
-                'inventory']
+                'inventory', 'shop']
 all_items_in_rooms = [cotton_clothing, pistol, grenade, shotgun, regular_healing_potion, revolver, common_damage_potion,
                       ultra_healing_potion, platinum_clothing, ray_gun, assault_rifle, rocket_launcher, suicide_potion,
                       damage_potion, common_damage_potion, reviving_potion, metal_clothing, common_armor_potion]
@@ -349,7 +351,21 @@ while True:
         pos = short_directions.index(command)
         command = directions[pos]
     if command == 'shop':
-        print("")
+        print("Shop")
+        print("Items:")
+        for i in store_items:
+            print("(%s)%s ----- %s G" % (i.shop_number, i.name, i.value))
+        print("You have %s G" % you.dinero)
+        if command == 'buy 1' and inventory.armor is not bronze_clothing:
+            if you.dinero >= bronze_clothing.value:
+                print("You have bought %s" % bronze_clothing.name)
+                you.dinero -= bronze_clothing.value
+                inventory.armor = bronze_clothing
+        if command == 'buy 2' and inventory.armor is not chain_clothing:
+            if you.dinero >= chain_clothing.value:
+                print("You have bought %s" % chain_clothing)
+                you.dinero -= chain_clothing.value
+                inventory.armor = chain_clothing
     if command == 'attack':
         take_damage_or_no = random.randint(0, 1)
         if current_node.is_shrek_room is shrek:
