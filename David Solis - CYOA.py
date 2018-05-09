@@ -242,7 +242,7 @@ class Inventory:
         self.potion = potion
 
 
-you = Characters("Your Name", 100, "You are yourself", 1000000000, 0, 1000000000000000000000000000000000000000000000000)
+you = Characters("Your Name", 100, "You are yourself", 10, 0, 1000000000000000000000000000000000000000000000000)
 shrek = Characters("Shrek", 100, "A tall green man with a bald head and a huge mouth and nose.", 20, 100, None)
 # rip your code
 
@@ -324,7 +324,9 @@ inventory = Inventory(None, None, None)
 
 all_commands = ['north', 'east', 'south', 'west', 'n', 'e', 's', 'w', 'quit', 'attack', 'take', 'drink potion',
                 'drop weapon', 'drop potion', 'drop armor', 'health', 'meme big boy', 'bitconnect', 'bad word', 'look',
-                'inventory', 'shop']
+                'inventory', 'shop', 'buy 1', 'buy 2', 'buy 3', 'buy 4', 'buy 5', 'buy 6', 'buy 7', 'buy 8', 'buy 9',
+                'exit']
+shop_commands = ['buy 1', 'buy 2', 'buy 3', 'buy 4', 'buy 5', 'buy 6', 'buy 7', 'buy 8', 'buy 9', 'exit']
 all_items_in_rooms = [cotton_clothing, pistol, grenade, shotgun, regular_healing_potion, revolver, common_damage_potion,
                       ultra_healing_potion, platinum_clothing, ray_gun, assault_rifle, rocket_launcher, suicide_potion,
                       damage_potion, common_damage_potion, reviving_potion, metal_clothing, common_armor_potion]
@@ -351,21 +353,120 @@ while True:
         pos = short_directions.index(command)
         command = directions[pos]
     if command == 'shop':
+        shop = True
         print("Shop")
         print("Items:")
         for i in store_items:
             print("(%s)%s ----- %s G" % (i.shop_number, i.name, i.value))
         print("You have %s G" % you.dinero)
-        if command == 'buy 1' and inventory.armor is not bronze_clothing:
-            if you.dinero >= bronze_clothing.value:
-                print("You have bought %s" % bronze_clothing.name)
-                you.dinero -= bronze_clothing.value
-                inventory.armor = bronze_clothing
-        if command == 'buy 2' and inventory.armor is not chain_clothing:
-            if you.dinero >= chain_clothing.value:
-                print("You have bought %s" % chain_clothing)
-                you.dinero -= chain_clothing.value
-                inventory.armor = chain_clothing
+        print("If you wish to exit the shop, type 'exit' into the command.")
+        while shop is True:
+            command = input('>_').lower().strip()
+            if command == 'exit':
+                print("You have exited the shop.")
+                shop = False
+            if command == 'buy 1' and inventory.armor is bronze_clothing:
+                print("You already own that.")
+            elif command == 'buy 2' and inventory.armor is chain_clothing:
+                print("You already own that.")
+            elif command == 'buy 3' and inventory.armor is emerald_clothing:
+                print("You already own that.")
+            elif command == 'buy 4' and inventory.armor is diamond_clothing:
+                print("You already own that.")
+            elif command == 'buy 5' and inventory.armor is iron_clothing:
+                print("You already own that.")
+            elif command == 'buy 6' and inventory.armor is metal_clothing:
+                print("You already own that.")
+            elif command == 'buy 7' and inventory.armor is wood_clothing:
+                print("You already own that.")
+            elif command == 'buy 8' and inventory.weapon is wonder_waffle:
+                print("You already own that.")
+            elif command == 'buy 9' and inventory.weapon is ray_gun_mark11:
+                print("You already own that.")
+            if command == 'buy 1' and inventory.armor is not bronze_clothing:
+                if you.dinero >= bronze_clothing.value:
+                    print("You have bought %s." % bronze_clothing.name)
+                    you.dinero -= bronze_clothing.value
+                    inventory.armor = bronze_clothing
+                    you.armor += inventory.armor.armor_amount
+                    shop = False
+                else:
+                    print("You don't have enough money to buy that.")
+
+            elif command == 'buy 2' and inventory.armor is not chain_clothing:
+                if you.dinero >= chain_clothing.value:
+                    print("You have bought %s." % chain_clothing.name)
+                    you.dinero -= chain_clothing.value
+                    inventory.armor = chain_clothing
+                    you.armor += inventory.armor.armor_amount
+                    shop = False
+                else:
+                    print("You don't have enough money to buy that.")
+            elif command == 'buy 3' and inventory.armor is not emerald_clothing:
+                if you.dinero >= emerald_clothing.value:
+                    print("You have bought %s." % emerald_clothing.name)
+                    you.dinero -= emerald_clothing.value
+                    inventory.armor = emerald_clothing
+                    you.armor += inventory.armor.armor_amount
+                    shop = False
+                else:
+                    print("You don't have enough money to buy that.")
+            elif command == 'buy 4' and inventory.armor is not diamond_clothing:
+                if you.dinero >= diamond_clothing.value:
+                    print("You have bought %s." % diamond_clothing.name)
+                    you.dinero -= diamond_clothing.value
+                    inventory.armor = diamond_clothing
+                    you.armor += inventory.armor.armor_amount
+                    shop = False
+                else:
+                    print("You don't have enough money to buy that.")
+            elif command == 'buy 5' and inventory.armor is not chain_clothing:
+                if you.dinero >= chain_clothing.value:
+                    print("You have bought %s." % chain_clothing.name)
+                    you.dinero -= chain_clothing.value
+                    inventory.armor = chain_clothing
+                    you.armor += inventory.armor.armor_amount
+                    shop = False
+                else:
+                    print("You don't have enough money to buy that.")
+            elif command == 'buy 6' and inventory.armor is not metal_clothing:
+                if you.dinero >= metal_clothing.value:
+                    print("You have bought %s." % metal_clothing.name)
+                    you.dinero -= metal_clothing.value
+                    inventory.armor = metal_clothing
+                    you.armor += inventory.armor.armor_amount
+                    shop = False
+                else:
+                    print("You don't have enough money to buy that.")
+            elif command == 'buy 7' and inventory.amor is not wood_clothing:
+                if you.dinero >= wood_clothing.value:
+                    print("You have bought %s." % wood_clothing.name)
+                    you.dinero -= wood_clothing.value
+                    inventory.armor = wood_clothing
+                    you.armor += inventory.armor.armor_amount
+                    shop = False
+                else:
+                    print("You don't have enough money to buy that.")
+            elif command == 'buy 8' and inventory.weapon is not wonder_waffle:
+                if you.dinero >= wonder_waffle.value:
+                    print("You have bought %s." % wonder_waffle.name)
+                    you.dinero -= wonder_waffle.value
+                    inventory.weapon = wonder_waffle
+                    you.attack += inventory.weapon.damage_amount
+                    shop = False
+                else:
+                    print("You don't have enough money to buy that.")
+            elif command == 'buy 9' and inventory.weapon is not ray_gun_mark11:
+                if you.dinero >= ray_gun_mark11.value:
+                    print("You have bought %s." % ray_gun_mark11.name)
+                    you.dinero -= ray_gun_mark11.value
+                    inventory.weapon = ray_gun_mark11
+                    you.attack += inventory.weapon.damage_amount
+                    shop = False
+                else:
+                    print("You don't have enough money to buy that.")
+            if command not in shop_commands:
+                print("Make sure that the you typed it as 'buy #'.")
     if command == 'attack':
         take_damage_or_no = random.randint(0, 1)
         if current_node.is_shrek_room is shrek:
