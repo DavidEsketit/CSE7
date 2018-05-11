@@ -6,6 +6,7 @@
 #  Instantiation of classes
 #  Controller
 import random
+import webbrowser
 
 
 class Item(object):
@@ -222,10 +223,10 @@ all_potions = [ultra_healing_potion, regular_healing_potion, common_healing_poti
 
 
 class Characters(object):
-    def __init__(self, name, health, description, attack, armor, dinero):
+    def __init__(self, name, health, char_description, attack, armor, dinero):
         self.name = name
         self.health = health
-        self.description = description
+        self.char_description = char_description
         self.attack = attack
         self.death = False
         self.armor = armor
@@ -242,19 +243,19 @@ class Inventory:
         self.potion = potion
 
 
-you = Characters("Your Name", 100, "You are yourself", 10, 0, 1000000000000000000000000000000000000000000000000)
+you = Characters("Your Name", 100, "You are yourself", 100, 0, 100)
 shrek = Characters("Shrek", 100, "A tall green man with a bald head and a huge mouth and nose.", 20, 100, None)
 # rip your code
 
 
 class Room(object):
-    def __init__(self, name, north, east, south, west, description, item_in_room, is_shrek_room):
+    def __init__(self, name, north, east, south, west, room_description, item_in_room, is_shrek_room):
         self.name = name
         self.north = north
         self.east = east
         self.south = south
         self.west = west
-        self.description = description
+        self.room_description = room_description
         self.item_in_room = item_in_room
         self.is_shrek_room = is_shrek_room
 
@@ -325,22 +326,23 @@ inventory = Inventory(None, None, None)
 all_commands = ['north', 'east', 'south', 'west', 'n', 'e', 's', 'w', 'quit', 'attack', 'take', 'drink potion',
                 'drop weapon', 'drop potion', 'drop armor', 'health', 'meme big boy', 'bitconnect', 'bad word', 'look',
                 'inventory', 'shop', 'buy 1', 'buy 2', 'buy 3', 'buy 4', 'buy 5', 'buy 6', 'buy 7', 'buy 8', 'buy 9',
-                'exit']
+                'exit', 'snap']
 shop_commands = ['buy 1', 'buy 2', 'buy 3', 'buy 4', 'buy 5', 'buy 6', 'buy 7', 'buy 8', 'buy 9', 'exit']
 all_items_in_rooms = [cotton_clothing, pistol, grenade, shotgun, regular_healing_potion, revolver, common_damage_potion,
                       ultra_healing_potion, platinum_clothing, ray_gun, assault_rifle, rocket_launcher, suicide_potion,
                       damage_potion, common_damage_potion, reviving_potion, metal_clothing, common_armor_potion]
 store_items = [bronze_clothing, chain_clothing, emerald_clothing, diamond_clothing, iron_clothing, metal_clothing,
                wood_clothing, wonder_waffle, ray_gun_mark11]
-shrek_location = random.choice(all_rooms)
+shrek_location = random.choices(all_rooms)
+shrek_dead = 'false'
 directions = ['north', 'east', 'south', 'west']
 current_node = parking_lot
 short_directions = ['n', 'e', 's', 'w']
 while True:
     print(current_node.name)
-    print(current_node.description)
-    shrek_dead = 'false'
+    print(current_node.room_description)
     command = input('>_').lower().strip()
+    attack_description = 'true'
     if you.health <= 0:
         print("You have died")
         quit()
@@ -358,9 +360,9 @@ while True:
         print("Items:")
         for i in store_items:
             print("(%s)%s ----- %s G" % (i.shop_number, i.name, i.value))
-        print("You have %s G" % you.dinero)
         print("If you wish to exit the shop, type 'exit' into the command.")
         while shop is True:
+            print("Your Coins: %s G" % you.dinero)
             command = input('>_').lower().strip()
             if command == 'exit':
                 print("You have exited the shop.")
@@ -386,7 +388,7 @@ while True:
             if command == 'buy 1' and inventory.armor is not bronze_clothing:
                 if you.dinero >= bronze_clothing.value:
                     print("You have bought %s." % bronze_clothing.name)
-                    you.dinero -= bronze_clothing.value
+                    you.dinero = you.dinero - bronze_clothing.value
                     inventory.armor = bronze_clothing
                     you.armor += inventory.armor.armor_amount
                 else:
@@ -395,7 +397,7 @@ while True:
             elif command == 'buy 2' and inventory.armor is not chain_clothing:
                 if you.dinero >= chain_clothing.value:
                     print("You have bought %s." % chain_clothing.name)
-                    you.dinero -= chain_clothing.value
+                    you.dinero = you.dinero - chain_clothing.value
                     inventory.armor = chain_clothing
                     you.armor += inventory.armor.armor_amount
                 else:
@@ -403,7 +405,7 @@ while True:
             elif command == 'buy 3' and inventory.armor is not emerald_clothing:
                 if you.dinero >= emerald_clothing.value:
                     print("You have bought %s." % emerald_clothing.name)
-                    you.dinero -= emerald_clothing.value
+                    you.dinero = you.dinero - emerald_clothing.value
                     inventory.armor = emerald_clothing
                     you.armor += inventory.armor.armor_amount
                 else:
@@ -411,23 +413,23 @@ while True:
             elif command == 'buy 4' and inventory.armor is not diamond_clothing:
                 if you.dinero >= diamond_clothing.value:
                     print("You have bought %s." % diamond_clothing.name)
-                    you.dinero -= diamond_clothing.value
+                    you.dinero = you.dinero - diamond_clothing.value
                     inventory.armor = diamond_clothing
                     you.armor += inventory.armor.armor_amount
                 else:
                     print("You don't have enough money to buy that.")
-            elif command == 'buy 5' and inventory.armor is not chain_clothing:
-                if you.dinero >= chain_clothing.value:
-                    print("You have bought %s." % chain_clothing.name)
-                    you.dinero -= chain_clothing.value
-                    inventory.armor = chain_clothing
+            elif command == 'buy 5' and inventory.armor is not iron_clothing:
+                if you.dinero >= iron_clothing.value:
+                    print("You have bought %s." % iron_clothing.name)
+                    you.dinero = you.dinero - iron_clothing.value
+                    inventory.armor = iron_clothing
                     you.armor += inventory.armor.armor_amount
                 else:
                     print("You don't have enough money to buy that.")
             elif command == 'buy 6' and inventory.armor is not metal_clothing:
                 if you.dinero >= metal_clothing.value:
                     print("You have bought %s." % metal_clothing.name)
-                    you.dinero -= metal_clothing.value
+                    you.dinero = you.dinero - metal_clothing.value
                     inventory.armor = metal_clothing
                     you.armor += inventory.armor.armor_amount
                 else:
@@ -435,7 +437,7 @@ while True:
             elif command == 'buy 7' and inventory.armor is not wood_clothing:
                 if you.dinero >= wood_clothing.value:
                     print("You have bought %s." % wood_clothing.name)
-                    you.dinero -= wood_clothing.value
+                    you.dinero = you.dinero - wood_clothing.value
                     inventory.armor = wood_clothing
                     you.armor += inventory.armor.armor_amount
                 else:
@@ -443,7 +445,7 @@ while True:
             elif command == 'buy 8' and inventory.weapon is not wonder_waffle:
                 if you.dinero >= wonder_waffle.value:
                     print("You have bought %s." % wonder_waffle.name)
-                    you.dinero -= wonder_waffle.value
+                    you.dinero = you.dinero - wonder_waffle.value
                     inventory.weapon = wonder_waffle
                     you.attack += inventory.weapon.damage_amount
                 else:
@@ -451,7 +453,7 @@ while True:
             elif command == 'buy 9' and inventory.weapon is not ray_gun_mark11:
                 if you.dinero >= ray_gun_mark11.value:
                     print("You have bought %s." % ray_gun_mark11.name)
-                    you.dinero -= ray_gun_mark11.value
+                    you.dinero = you.dinero - ray_gun_mark11.value
                     inventory.weapon = ray_gun_mark11
                     you.attack += inventory.weapon.damage_amount
                 else:
@@ -460,21 +462,15 @@ while True:
                 print("Make sure that the you typed it as 'buy #'.")
     if command == 'attack':
         take_damage_or_no = random.randint(0, 1)
-        fight = True
-        description = True
-        if description is True:
-            print("You have entered a fight with Shrek.")
-            print("If you want to leave the battle, type 'run' into the command. If you do so, you will lose some "
-                  "health.")
-            description = False
-        while fight is True:
-            command = input('>_').lower().strip()
+        if attack_description == 'true':
+            attack_description = 'false'
             if shrek.health <= 0 and shrek_dead == 'false':
                 shrek_dead = 'true'
                 current_node.is_shrek_room = None
-                shrek_location.is_shrek_room = shrek
+                restrooms.is_shrek_room = shrek
+                you.dinero += 200
                 print("Shrek is dead and has been resurrected by the Devil and is in a different room.")
-                fight = False
+                print("+200 G")
             elif current_node.is_shrek_room is None:
                 print("Shrek is not in the room.")
             if current_node.is_shrek_room is shrek:
@@ -499,8 +495,6 @@ while True:
                                 print("Shrek attacked back for %s" % shrek.attack)
                             else:
                                 print("Shrek attacked back but you were able to shield it with your mighty armor.")
-            print("------------------------------------------------------------------------------------------------"
-                  "-")
     if command == 'take':
         if current_node.item_in_room in all_armor:
             print("You picked up a %s" % current_node.item_in_room.name)
@@ -537,6 +531,8 @@ while True:
 
         else:
             print("You have no potion to drink.")
+    if command == 'snap':
+        webbrowser.open("https://youtu.be/3jTad1iIc58")
 
     if command == 'drop weapon':
         current_node.item_in_room = inventory.weapon
@@ -567,7 +563,7 @@ while True:
         quit(0)
 
     if command == 'look':
-        print(current_node.description)
+        print(current_node.room_description)
 
     if command == 'inventory':
         if inventory.armor is not None:
