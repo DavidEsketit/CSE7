@@ -34,11 +34,9 @@ diamond_clothing = ExoticA('Diamond Clothing',
                            'A very heavy clothing but gives you the power to summon diamond walls.', 500, 4, 100,
                            'Gives you the power to summon walls that block damage.')
 
-
 emerald_clothing = ExoticA('Emerald Clothing',
                            'A more light weight clothing made out of emerald.', 500, 3, 100,
                            'Allows you to deflect 40% of the damage.')
-
 
 platinum_clothing = ExoticA('Platinum Clothing',
                             'A heavy piece of armor that is made of platinum.', 500, None, 100,
@@ -55,11 +53,9 @@ iron_clothing = RareA('Iron Clothing',
                       'A reasonable weight armor that is made of Iron', 280, 5, 50,
                       'Can block 20% of the damage from any weapon except exotic weapons.')
 
-
 metal_clothing = RareA('Metal Clothing',
                        'An armor made out of metal on the more heavy side.', 300, 6, 60,
                        'Can block 25% of the damage from any weapon except exotic weapons.')
-
 
 wood_clothing = RareA('Wood Clothing',
                       'An armor made out of wood that is very light weight.', 250, 7, 40,
@@ -75,11 +71,9 @@ class CommonA(Armor):
 cotton_clothing = CommonA('Cotton Clothing', 'A regular t-shirt.', 0, None, 0,
                           'Has a 0.0000000001% chance that you will become invincible to everything.')
 
-
 bronze_clothing = CommonA('Bronze Clothing',
                           'A light weight armor that is made out of bronze.', 100, 1, 20,
                           'Can block 10% of damage conflicted by anything except exotic weapons.')
-
 
 chain_clothing = CommonA('Chain Clothing', 'An armor made out of chain.', 50, 2, 10,
                          'Can block 5% of damage conflicted by anything expect exotic weapons.')
@@ -100,10 +94,8 @@ class ExoticW(Weapon):
 ray_gun = ExoticW('Ray Gun', 'A gun from the game called Call of Duty: Black Ops', 600, None, 40,
                   'The most powerful weapon known to mankind.')
 
-
 wonder_waffle = ExoticW('Wonder Waffle', 'A gun from the game called Call of Duty: Black Ops', 560, 8, 40,
                         'Blows things away from you and also does instant kills but takes 20 seconds to reload.')
-
 
 ray_gun_mark11 = ExoticW('Ray Gun Mark II', 'A gun from the game called Call of Duty: Black Ops', 550, 9, 40,
                          'Has a 20% chance that gun will nuke the Wal-Mart and win the game for you.')
@@ -118,10 +110,8 @@ class RareW(Weapon):
 rocket_launcher = RareW('Rocket Launcher', 'A long damage dealing weapon that launches rockets.', 300, None, 30,
                         'Also damages nearby enemies caught or near the blast of the rocket.')
 
-
 assault_rifle = RareW('Assault Rifle', 'An automatic rifle that does quite a bit of damage.', 280, None, 30,
                       'Can shoot faster than any other weapon in the game.')
-
 
 revolver = RareW('Revolver', 'A damage dealing pistol that with 6 bullets.', 250, None, 30,
                  'Can shoot the all rounds in less than one second like McCree from Overwatch.')
@@ -136,10 +126,8 @@ class CommonW(Weapon):
 pistol = CommonA('Pistol', 'A semi-automatic pistol with 16 bullets in each magazine.', 100, None, 10,
                  'Can only shoot once at a time.')
 
-
 shotgun = CommonA('Shotgun', 'A shotgun that does more damage than the average common weapon.', 130, None, 15,
                   'Can shoot multiple people wih on shot.')
-
 
 grenade = CommonA('Grenade', 'A grenade that does an instant kill but only if person is close to grenade.', 150, None,
                   20, 'Can do damage to multiple players at the same time.')
@@ -165,11 +153,9 @@ ultra_healing_potion = ExoticP('Ultra Healing Potion',
                                'A magical potion from the unknown that has a yellow glow to it.', 500, None,
                                100, 'Can recover 60% of your health.')
 
-
 reviving_potion = ExoticP('Reviving Potion', 'A potion from the gods that can do the impossible.', 600, None,
                           100,
                           'If you are dead and have the item in your inventory, this can revive you from the dead.')
-
 
 suicide_potion = ExoticP('Suicide Potion', 'A potion from hell with a devilish look to it.', 1000, None,
                          1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
@@ -186,11 +172,9 @@ regular_healing_potion = RareP('Regular Healing Potion',
                                'A potion with a yellow tint but not as bright as the Exotic Healing Potion.', 300, None,
                                20, 'Heals 20% of your total health.')
 
-
 damage_potion = RareP('Damage Potion', 'A potion with a bright red tint with smoke coming out of it.',
                       280, None, 20,
                       'Can be thrown at someone and be spread if other people are near.')
-
 
 armor_potion = RareP('Armor Potion', 'A potion with a blue tint with blue smoke coming out from the top.',
                      320, None, 40,
@@ -207,10 +191,8 @@ common_healing_potion = CommonP('Common Healing Potion',
                                 'An almost clear looking potion with a very unnoticeable yellow tint.',
                                 10, None, 200, 'Heals 10% of your health.')
 
-
 common_damage_potion = CommonP('Common Damage Potion', 'A potion that looks very devilish.',
                                10, None, 180, 'Does 10% damage to any_nearby enemy.')
-
 
 common_armor_potion = CommonP('Common Armor Potion',
                               'A potion that looks like hte fortnite potion that gives you of armor.',
@@ -247,6 +229,8 @@ class Inventory:
 
 you = Characters("Your Name", 100, "You are yourself", 10, 0, 100)
 shrek = Characters("Shrek", 100, "A tall green man with a bald head and a huge mouth and nose.", 20, 100, None)
+
+
 # rip your code
 
 
@@ -280,18 +264,21 @@ jewelery = Room("Jewelery", None, None, 'apparel', None, "The jewelery seems to 
                 "looks to be like clothes. There is also a grenade lying on the ground which seems to be safe.",
                 grenade, None)
 home = Room("Home", 'pharmacy', 'toys', None, None, "There is a lot of furniture around you and when you walk on the "
-            "floor is squeaky. There is also a shotgun on a couch.", shotgun, None)
+                                                    "floor is squeaky. There is also a shotgun on a couch.", shotgun,
+            None)
 toys = Room("Toys", 'lawn_and_garden', 'home', 'sporting_goods', None, "You in a section with toys. There are pretend "
-            "swords and RC cars. There is also some kind of potion in a toy.", regular_healing_potion, None)
+            "swords and RC cars. There is also some kind of potion in a toy.",
+            regular_healing_potion, None)
 lawn_and_garden = Room("Lawn and Garden", None, None, 'toys', 'cosmetics', "There is one lawn mower left with some soil"
                        "next to it, everything else looks to be old and moldy. There is also a revolver on top of a "
-                       "lawn mower.", revolver, None)
+                                                                           "lawn mower.", revolver, None)
 cosmetics = Room("Cosmetics", None, 'lawn_and_garden', None, 'health', "All the make up looks untouched. There are "
                  "bushes on the table in front of you. There is also a potion in a makeup box.",
                  common_damage_potion, None)
 health_and_beauty = Room("Health and Beauty", None, 'cosmetics', None, 'pharmacy', "There is a lot of lotion and your "
-                         "skin is dry. There are extensions for your hair lying on the ground. There is also a wierd "
-                         "looking potion on a shelf.", ultra_healing_potion, None)
+                         "skin is dry. There are extensions for your hair lying on the ground. There is also a weird "
+                                                                                   "looking potion on a shelf.",
+                         ultra_healing_potion, None)
 sporting_goods = Room("Sporting Goods", 'toys', None, 'shoes', None,
                       "There are multiple bats hung up on the wall. There are also some balls on the floor.",
                       platinum_clothing, None)
@@ -384,7 +371,7 @@ while True:
             if command == 'exit':
                 print("You have exited the shop.")
                 shop = False
-            #  Checks what you want to buy
+            # Checks what you want to buy
             if command == 'buy 1' and inventory.armor is bronze_clothing:
                 print("You already own that.")
             elif command == 'buy 2' and inventory.armor is chain_clothing:
@@ -403,7 +390,7 @@ while True:
                 print("You already own that.")
             elif command == 'buy 9' and inventory.weapon is ray_gun_mark11:
                 print("You already own that.")
-            #  If you have enough money to buy what you want then it gives it to you
+            # If you have enough money to buy what you want then it gives it to you
             if command == 'buy 1' and inventory.armor is not bronze_clothing:
                 if you.dinero >= bronze_clothing.value:
                     print("You have bought %s." % bronze_clothing.name)
@@ -503,17 +490,17 @@ while True:
                         print("Pew pew!")
                         print("Shrek has lost %s health" % you.attack)
                     if inventory.armor in all_armor and inventory.armor.armor_amount > 0:
-                            if take_damage_or_no == 1:
-                                inventory.armor.armor_amount -= shrek.attack
-                                print("Shrek attacked back for %s" % shrek.attack)
-                            else:
-                                print("Shrek attacked back but you were able to block it.")
+                        if take_damage_or_no == 1:
+                            inventory.armor.armor_amount -= shrek.attack
+                            print("Shrek attacked back for %s" % shrek.attack)
+                        else:
+                            print("Shrek attacked back but you were able to block it.")
                     elif inventory.armor not in all_armor or inventory.armor.armor_amount <= 0:
-                            if take_damage_or_no == 1:
-                                you.health -= shrek.attack
-                                print("Shrek attacked back for %s" % shrek.attack)
-                            else:
-                                print("Shrek attacked back but you were able to shield it with your mighty armor.")
+                        if take_damage_or_no == 1:
+                            you.health -= shrek.attack
+                            print("Shrek attacked back for %s" % shrek.attack)
+                        else:
+                            print("Shrek attacked back but you were able to shield it with your mighty armor.")
     if command == 'take':
         if current_node.item_in_room in all_armor:
             print("You picked up a %s" % current_node.item_in_room.name)
