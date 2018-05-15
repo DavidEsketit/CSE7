@@ -9,6 +9,7 @@ import random
 import webbrowser
 
 
+# All my items
 class Item(object):
     def __init__(self, name, description, value, shop_number):
         self.name = name
@@ -222,6 +223,7 @@ all_potions = [ultra_healing_potion, regular_healing_potion, common_healing_poti
                suicide_potion, damage_potion, armor_potion, common_armor_potion]
 
 
+# My character and enemy
 class Characters(object):
     def __init__(self, name, health, char_description, attack, armor, dinero):
         self.name = name
@@ -243,11 +245,12 @@ class Inventory:
         self.potion = potion
 
 
-you = Characters("Your Name", 100, "You are yourself", 100, 0, 100)
+you = Characters("Your Name", 100, "You are yourself", 10, 0, 100)
 shrek = Characters("Shrek", 100, "A tall green man with a bald head and a huge mouth and nose.", 20, 100, None)
 # rip your code
 
 
+# All rooms or places in game
 class Room(object):
     def __init__(self, name, north, east, south, west, room_description, item_in_room, is_shrek_room):
         self.name = name
@@ -259,7 +262,7 @@ class Room(object):
         self.item_in_room = item_in_room
         self.is_shrek_room = is_shrek_room
 
-    def move(self, direction):
+    def move(self, direction):  # Moves your character from room to room
         global current_node
         current_node = globals()[getattr(self, direction)]
 
@@ -321,12 +324,10 @@ electronics = Room("Electronics", 'photos', None, None, None,
 all_rooms = [parking_lot, pharmacy, jewelery, home, toys, lawn_and_garden, cosmetics, health_and_beauty, sporting_goods,
              shoes, baby, pets, paper_and_cleaning, groceries, apparel, restrooms, photos, electronics]
 inventory = Inventory(None, None, None)
-# Controller
-
 all_commands = ['north', 'east', 'south', 'west', 'n', 'e', 's', 'w', 'quit', 'attack', 'take', 'drink potion',
                 'drop weapon', 'drop potion', 'drop armor', 'health', 'meme big boy', 'bitconnect', 'bad word', 'look',
                 'inventory', 'shop', 'buy 1', 'buy 2', 'buy 3', 'buy 4', 'buy 5', 'buy 6', 'buy 7', 'buy 8', 'buy 9',
-                'exit', 'snap']
+                'exit', 'snap', 'help']
 shop_commands = ['buy 1', 'buy 2', 'buy 3', 'buy 4', 'buy 5', 'buy 6', 'buy 7', 'buy 8', 'buy 9', 'exit']
 all_items_in_rooms = [cotton_clothing, pistol, grenade, shotgun, regular_healing_potion, revolver, common_damage_potion,
                       ultra_healing_potion, platinum_clothing, ray_gun, assault_rifle, rocket_launcher, suicide_potion,
@@ -338,10 +339,25 @@ shrek_dead = 'false'
 directions = ['north', 'east', 'south', 'west']
 current_node = parking_lot
 short_directions = ['n', 'e', 's', 'w']
+if inventory.potion == reviving_potion and you.health <= 0:
+    you.health += reviving_potion.potion_ability
+    inventory.potion = None
+    print("You died.")
+    print("BUT YOUR REVIVING POTION HAS RESURRECTED YOU!")
 while True:
     print(current_node.name)
     print(current_node.room_description)
+    print("type 'help' for assistance.")
     command = input('>_').lower().strip()
+    if command == 'help':
+        print("To move to a different room type 'north', 'east', 'south', 'west' or 'n', 'e', 's', 'w'.")
+        print("To take something from the ground, simply type 'take'.")
+        print("To drink a potion in your inventory type 'drink potion'.")
+        print("To drop an item in your inventory type 'drop weapon/potion/armor'.")
+        print("To exit the game type 'quit'.")
+        print("To enter the shop, type 'shop' into the command.")
+        print("To start a fight with Shrek, type 'attack' into the command.")
+        print("To see your inventory type 'inventory'.")
     attack_description = 'true'
     if you.health <= 0:
         print("You have died")
@@ -351,10 +367,9 @@ while True:
 
     elif command in short_directions:
         # Finds the command in short directions (index number)
-        # Finds the command in short directions (index number)
         pos = short_directions.index(command)
         command = directions[pos]
-    if command == 'shop':
+    if command == 'shop':  # Opens the shop
         shop = True
         print("Shop")
         print("Items:")
@@ -364,9 +379,12 @@ while True:
         while shop is True:
             print("Your Coins: %s G" % you.dinero)
             command = input('>_').lower().strip()
+            if command == 'help':
+                print("To purchase and item type 'buy #'")
             if command == 'exit':
                 print("You have exited the shop.")
                 shop = False
+            #  Checks what you want to buy
             if command == 'buy 1' and inventory.armor is bronze_clothing:
                 print("You already own that.")
             elif command == 'buy 2' and inventory.armor is chain_clothing:
@@ -385,6 +403,7 @@ while True:
                 print("You already own that.")
             elif command == 'buy 9' and inventory.weapon is ray_gun_mark11:
                 print("You already own that.")
+            #  If you have enough money to buy what you want then it gives it to you
             if command == 'buy 1' and inventory.armor is not bronze_clothing:
                 if you.dinero >= bronze_clothing.value:
                     print("You have bought %s." % bronze_clothing.name)
@@ -458,13 +477,13 @@ while True:
                     you.attack += inventory.weapon.damage_amount
                 else:
                     print("You don't have enough money to buy that.")
-            if command not in shop_commands:
+            if command not in shop_commands:  # Tells you that you made a typo
                 print("Make sure that the you typed it as 'buy #'.")
     if command == 'attack':
         take_damage_or_no = random.randint(0, 1)
         if attack_description == 'true':
             attack_description = 'false'
-            if shrek.health <= 0 and shrek_dead == 'false':
+            if shrek.health <= 0 and shrek_dead == 'false':  #
                 shrek_dead = 'true'
                 current_node.is_shrek_room = None
                 restrooms.is_shrek_room = shrek
@@ -531,8 +550,10 @@ while True:
 
         else:
             print("You have no potion to drink.")
+        if inventory.potion == suicide_potion:
+            you.health -= suicide_potion.potion_ability
     if command == 'snap':
-        webbrowser.open("https://youtu.be/3jTad1iIc58")
+        webbrowser.open("https://www.youtube.com/watch?v=Ywq1CwH63dM")
 
     if command == 'drop weapon':
         current_node.item_in_room = inventory.weapon
@@ -582,9 +603,9 @@ while True:
             print(inventory.potion.name)
 
         else:
-            print("You don't have armor.")
+            print("You don't have a potion.")
 
-    if command in directions:
+    if command in directions:  # Controller
         try:
             current_node.move(command)
         except KeyError:
