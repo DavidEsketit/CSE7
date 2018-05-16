@@ -228,7 +228,7 @@ class Inventory:
 
 
 you = Characters("Your Name", 100, "You are yourself", 10, 0, 100)
-shrek = Characters("Shrek", 100, "A tall green man with a bald head and a huge mouth and nose.", 20, 100, None)
+shrek = Characters("Shrek", 100, "A tall green man with a bald head and a huge mouth and nose.", 5, 100, None)
 
 
 # rip your code
@@ -322,6 +322,7 @@ all_items_in_rooms = [cotton_clothing, pistol, grenade, shotgun, regular_healing
 store_items = [bronze_clothing, chain_clothing, emerald_clothing, diamond_clothing, iron_clothing, metal_clothing,
                wood_clothing, wonder_waffle, ray_gun_mark11]
 shrek_location = random.choices(all_rooms)
+intro_game = False
 shrek_dead = 'false'
 directions = ['north', 'east', 'south', 'west']
 current_node = parking_lot
@@ -332,6 +333,61 @@ if inventory.potion == reviving_potion and you.health <= 0:
     print("You died.")
     print("BUT YOUR REVIVING POTION HAS RESURRECTED YOU!")
 while True:
+    intro_game_description = False
+    while intro_game is False:
+        if intro_game_description is False:
+            print("You're with your friends driving to San Francisco. On the way your friends spot an unusual\n"
+                  "building. You and your friends want to check it out but one of them doesn't think it's a good\n"
+                  "idea. You all agree to check it out. As you guys approach the abandoned building you all realize\n"
+                  "that it's an abandoned Wal-Mart. Everyone gets out one at a time but as that happens, they\n"
+                  "disappear. When it's your turn to get out, a big huge green man gets in front of you. You have \n"
+                  "an adrenaline rush and pick up your fists. You have no choice but to fight the one, the only..."
+                  "SHREK.")
+            print("___________________________________________________________________________________________________")
+            print("type 'attack' to fight shrek. Be aware that he can swing back. If you wish to run, you can by\n"
+                  "typing any direction such as, 'north', 'south, 'east', 'west', or 'n', 's', 'e', 'e'. If you do,\n"
+                  "you will lose some health.")
+            print("___________________________________________________________________________________________________")
+            intro_game_description = True
+        command = input('>_').lower().strip()
+        if command == 'attack':
+            if command == 'attack':
+                take_damage_or_no = random.randint(0, 1)
+                if shrek.health <= 0 and shrek_dead == 'false':
+                    shrek_dead = 'true'
+                    current_node.is_shrek_room = None
+                    restrooms.is_shrek_room = shrek
+                    you.dinero += 200
+                    print("Shrek is dead and has been resurrected by the Devil and is in a different room.")
+                    print("Keep in mind, every time you kill him he does more damage every time he is resurrected")
+                    print("+200 G")
+                    print("___________________________________________________________________________________________"
+                          "________")
+                    intro_game = True
+                elif current_node.is_shrek_room is None:
+                    print("Shrek is not in the room.")
+                if current_node.is_shrek_room is shrek:
+                    if shrek.health >= 0:
+                        if inventory.armor in all_armor and inventory.armor.armor_amount > 0:
+                            inventory.armor -= shrek.attack
+                            print("Pew pew!")
+                            print("Shrek has lost %s health." % you.attack)
+                        elif inventory.armor not in all_armor or inventory.armor.armor_amount <= 0:
+                            shrek.health -= you.attack
+                            print("Pew pew!")
+                            print("Shrek has lost %s health" % you.attack)
+                        if inventory.armor in all_armor and inventory.armor.armor_amount > 0:
+                            if take_damage_or_no == 1:
+                                inventory.armor.armor_amount -= shrek.attack
+                                print("Shrek attacked back for %s" % shrek.attack)
+                            else:
+                                print("Shrek attacked back but you were able to block it.")
+                        elif inventory.armor not in all_armor or inventory.armor.armor_amount <= 0:
+                            if take_damage_or_no == 1:
+                                you.health -= shrek.attack
+                                print("Shrek attacked back for %s" % shrek.attack)
+                            else:
+                                print("Shrek attacked back but you were able to shield it with your mighty armor.")
     print(current_node.name)
     print(current_node.room_description)
     print("type 'help' for assistance.")
@@ -475,6 +531,7 @@ while True:
                 current_node.is_shrek_room = None
                 restrooms.is_shrek_room = shrek
                 you.dinero += 200
+                shrek.attack += 10
                 print("Shrek is dead and has been resurrected by the Devil and is in a different room.")
                 print("+200 G")
             elif current_node.is_shrek_room is None:
