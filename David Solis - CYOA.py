@@ -30,6 +30,10 @@ class ExoticA(Armor):  # A stands for Armor
         self.exoticA_factor = exotica_factor
 
 
+infinity_gauntlet_armor = ExoticA('Infinity Gauntlet', 'The same gauntlet from the movie Infinity War, it is the most'
+                                                       'powerful item in the game.', None, None, 1000000000000000000000,
+                                  'Has a nearly infinite amount of armor, health, and damage.')
+
 diamond_clothing = ExoticA('Diamond Clothing',
                            'A very heavy clothing but gives you the power to summon diamond walls.', 500, 4, 100,
                            'Gives you the power to summon walls that block damage.')
@@ -90,6 +94,10 @@ class ExoticW(Weapon):
         super(ExoticW, self).__init__(name, description, value, shop_number, damage_amount)
         self.exoticW_factor = exoticw_factor
 
+
+infinity_gauntlet_weapon = ExoticW('Infinity Gauntlet', 'The same gauntlet from the movie Infinity War, it is the most'
+                                   'powerful item in the game.', None, None, 100000000000000000000000000000000000000000,
+                                   'Has a nearly infinite amount of armor, health, and damage.')
 
 ray_gun = ExoticW('Ray Gun', 'A gun from the game called Call of Duty: Black Ops', 600, None, 40,
                   'The most powerful weapon known to mankind.')
@@ -207,7 +215,7 @@ all_potions = [ultra_healing_potion, regular_healing_potion, common_healing_poti
 
 # My character and enemy
 class Characters(object):
-    def __init__(self, name, health, char_description, attack, armor, dinero):
+    def __init__(self, name, health, char_description, attack, armor, dinero, deaths):
         self.name = name
         self.health = health
         self.char_description = char_description
@@ -215,6 +223,7 @@ class Characters(object):
         self.death = False
         self.armor = armor
         self.dinero = dinero
+        self.deaths = deaths
 
     def take_damage(self, amount):
         self.health -= amount
@@ -227,8 +236,8 @@ class Inventory:
         self.potion = potion
 
 
-you = Characters("Your Name", 100, "You are yourself", 10, 0, 100)
-shrek = Characters("Shrek", 100, "A tall green man with a bald head and a huge mouth and nose.", 5, 100, None)
+you = Characters("Your Name", 100, "You are yourself", 10, 0, 100, None)
+shrek = Characters("Shrek", 100, "A tall green man with a bald head and a huge mouth and nose.", 5, 100, None, 0)
 
 
 # rip your code
@@ -310,7 +319,7 @@ electronics = Room("Electronics", 'photos', None, None, None,
 
 all_rooms = [parking_lot, pharmacy, jewelery, home, toys, lawn_and_garden, cosmetics, health_and_beauty, sporting_goods,
              shoes, baby, pets, paper_and_cleaning, groceries, apparel, restrooms, photos, electronics]
-inventory = Inventory(None, None, None)
+inventory = Inventory(infinity_gauntlet_weapon, None, None)
 all_commands = ['north', 'east', 'south', 'west', 'n', 'e', 's', 'w', 'quit', 'attack', 'take', 'drink potion',
                 'drop weapon', 'drop potion', 'drop armor', 'health', 'meme big boy', 'bitconnect', 'bad word', 'look',
                 'inventory', 'shop', 'buy 1', 'buy 2', 'buy 3', 'buy 4', 'buy 5', 'buy 6', 'buy 7', 'buy 8', 'buy 9',
@@ -321,28 +330,31 @@ all_items_in_rooms = [cotton_clothing, pistol, grenade, shotgun, regular_healing
                       damage_potion, common_damage_potion, reviving_potion, metal_clothing, common_armor_potion]
 store_items = [bronze_clothing, chain_clothing, emerald_clothing, diamond_clothing, iron_clothing, metal_clothing,
                wood_clothing, wonder_waffle, ray_gun_mark11]
-shrek_location = random.choices(all_rooms)
 intro_game = False
-shrek_dead = 'false'
 directions = ['north', 'east', 'south', 'west']
 current_node = parking_lot
 short_directions = ['n', 'e', 's', 'w']
+character_name = input('What shall your name be?\n>_')
+print("___________________________________________________________________________________________________")
+you.name = character_name
+you.attack += infinity_gauntlet_weapon.damage_amount
 if inventory.potion == reviving_potion and you.health <= 0:
     you.health += reviving_potion.potion_ability
     inventory.potion = None
     print("You died.")
     print("BUT YOUR REVIVING POTION HAS RESURRECTED YOU!")
 while True:
+    shrek_location = random.choice(all_rooms)
     intro_game_description = False
     while intro_game is False:
         if intro_game_description is False:
-            print("You're with your friends driving to San Francisco. On the way your friends spot an unusual\n"
-                  "building. You and your friends want to check it out but one of them doesn't think it's a good\n"
-                  "idea. You all agree to check it out. As you guys approach the abandoned building you all realize\n"
-                  "that it's an abandoned Wal-Mart. Everyone gets out one at a time but as that happens, they\n"
+            print("Hello %s, you're with your friends driving to San Francisco. On the way your friends spot an\n"
+                  "usual building. You and your friends want to check it out but one of them doesn't think it's a\n"
+                  "good idea. You all agree to check it out. As you guys approach the abandoned building you all\n"
+                  "realize that it's an abandoned Wal-Mart. Everyone gets out one at a time but as that happens, they\n"
                   "disappear. When it's your turn to get out, a big huge green man gets in front of you. You have \n"
                   "an adrenaline rush and pick up your fists. You have no choice but to fight the one, the only..."
-                  "SHREK.")
+                  "SHREK." % you.name)
             print("___________________________________________________________________________________________________")
             print("type 'attack' to fight shrek. Be aware that he can swing back. If you wish to run, you can by\n"
                   "typing any direction such as, 'north', 'south, 'east', 'west', or 'n', 's', 'e', 'e'. If you do,\n"
@@ -353,12 +365,13 @@ while True:
         if command == 'attack':
             if command == 'attack':
                 take_damage_or_no = random.randint(0, 1)
-                if shrek.health <= 0 and shrek_dead == 'false':
-                    shrek_dead = 'true'
+                if shrek.health <= 0:
                     current_node.is_shrek_room = None
-                    restrooms.is_shrek_room = shrek
+                    shrek_location.is_shrek_room = shrek
                     you.dinero += 200
-                    print("Shrek is dead and has been resurrected by the Devil and is in a different room.")
+                    shrek.attack += 10
+                    shrek.health += 100
+                    print("Shrek is dead and has been resurrected by the Devil and is in %s." % shrek_location.name)
                     print("Keep in mind, every time you kill him he does more damage every time he is resurrected")
                     print("+200 G")
                     print("___________________________________________________________________________________________"
@@ -407,11 +420,16 @@ while True:
         quit()
     if command == 'quit':
         quit(0)
-
     elif command in short_directions:
         # Finds the command in short directions (index number)
         pos = short_directions.index(command)
         command = directions[pos]
+    if shrek.deaths == 10:
+        inventory.armor = infinity_gauntlet_armor
+        inventory.weapon = infinity_gauntlet_weapon
+        print("Since you have defeated Shrek for the 10th time, you have been given the complete Infinity Gauntlet\n"
+              "with all the infinity stones already equipped on them.")
+        print("You have basically, won the game.")
     if command == 'shop':  # Opens the shop
         shop = True
         print("Shop")
@@ -455,7 +473,6 @@ while True:
                     you.armor += inventory.armor.armor_amount
                 else:
                     print("You don't have enough money to buy that.")
-
             elif command == 'buy 2' and inventory.armor is not chain_clothing:
                 if you.dinero >= chain_clothing.value:
                     print("You have bought %s." % chain_clothing.name)
@@ -526,13 +543,13 @@ while True:
         take_damage_or_no = random.randint(0, 1)
         if attack_description == 'true':
             attack_description = 'false'
-            if shrek.health <= 0 and shrek_dead == 'false':  #
-                shrek_dead = 'true'
+            if shrek.health <= 0:  # Puts shrek in a different room if he is dead
                 current_node.is_shrek_room = None
                 restrooms.is_shrek_room = shrek
                 you.dinero += 200
                 shrek.attack += 10
-                print("Shrek is dead and has been resurrected by the Devil and is in a different room.")
+                shrek.deaths += 1
+                print("Shrek is dead and has been resurrected to %s." % shrek_location.name)
                 print("+200 G")
             elif current_node.is_shrek_room is None:
                 print("Shrek is not in the room.")
@@ -564,97 +581,73 @@ while True:
             inventory.armor = current_node.item_in_room
             you.armor += inventory.armor.armor_amount
             current_node.item_in_room = None
-
         elif current_node.item_in_room in all_weapons:
             print("You picked up a %s" % current_node.item_in_room.name)
             inventory.weapon = current_node.item_in_room
             you.attack += inventory.weapon.damage_amount
             current_node.item_in_room = None
-
         elif current_node.item_in_room in all_potions:
             print("You picked up %s" % current_node.item_in_room.name)
             inventory.potion = current_node.item_in_room
             current_node.item_in_room = None
-
         else:
             print("There is nothing to take.")
-
     if command == 'drink potion':
         if inventory.potion in healing_potions:
             you.health += inventory.potion.potion_ability
             inventory.potion = None
-
         elif inventory.potion in damage_potions:
             you.attack += inventory.potion.potion_ability
             inventory.potion = None
-
         elif inventory.potion in armor_potions:
             you.armor += inventory.potion.potion_ability
             inventory.potion = None
-
         else:
             print("You have no potion to drink.")
         if inventory.potion == suicide_potion:
             you.health -= suicide_potion.potion_ability
     if command == 'snap':
         webbrowser.open("https://www.youtube.com/watch?v=Ywq1CwH63dM")
-
     if command == 'drop weapon':
         current_node.item_in_room = inventory.weapon
         inventory.weapon = None
-
     if command == 'drop potion':
         current_node.item_in_room = inventory.potion
         inventory.potion = None
-
     if command == 'drop armor':
         current_node.item_in_room = inventory.armor
         inventory.armor = None
-
     if command == 'health':
         print("You have %s health and %s armor." % (you.health, you.armor))
-
     if command == 'meme big boy':
         print("Isn't that from pewdiepie")
-
     if command == 'hello world':
         print("The world says hi back.")
-
     if command == 'bitconnect':
         print("BIT-CONNECT!")
-
     if command == 'bad word':
         print("Not in my Christian minecraft server.")
         quit(0)
-
     if command == 'look':
         print(current_node.room_description)
-
     if command == 'inventory':
         if inventory.armor is not None:
             print(inventory.armor.name)
-
         else:
             print("You don't have armor.")
-
         if inventory.weapon is not None:
             print(inventory.weapon.name)
-
         else:
             print("You don't have a weapon.")
-
         if inventory.potion is not None:
             print(inventory.potion.name)
-
         else:
             print("You don't have a potion.")
-
     if command in directions:  # Controller
         try:
             current_node.move(command)
         except KeyError:
             print("You cannot go that way")
-
     elif command not in all_commands:
         print("Command not found.")
     print("___________________________________________________________________________________________________")
